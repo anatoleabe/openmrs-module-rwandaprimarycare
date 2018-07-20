@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:util="http://www.springframework.org/schema/util"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
+	<!-- Service -->
+	<bean parent="serviceContext">
+		<property name="moduleService">
+			<list>
+				<value>org.openmrs.module.rwandaprimarycare.PrimaryCareService</value>
+				<bean class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+					<property name="transactionManager"><ref bean="transactionManager"/></property>
+					<property name="target">
+						<bean class="org.openmrs.module.rwandaprimarycare.impl.PrimaryCareServiceImpl">
+							<property name="dao">
+								<bean class="org.openmrs.module.rwandaprimarycare.db.hibernate.HibernatePrimaryCareDAO">
+									<property name="sessionFactory"><ref bean="sessionFactory"/></property>	
+								</bean>
+							</property>	
+						</bean>
+					</property>
+					<property name="preInterceptors">
+						<list>
+							<ref bean="authorizationInterceptor"/>
+						</list>
+					</property>
+					<property name="transactionAttributeSource">
+						<bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource"/>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean parent="patientServiceTarget">
+		<property name="identifierValidators">
+			<map>
+				<entry>
+					<key><value>org.openmrs.module.rwandaprimarycare.validator.IdentifierValidatorRwanda</value></key>
+					<bean class="org.openmrs.module.rwandaprimarycare.validator.IdentifierValidatorRwanda"/>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<!-- Exception/error handling resolver --> 
+	<bean id="rwandaPrimaryCareExceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="defaultErrorView" value="module/rwandaprimarycare/uncaughtException" />
+		<property name="warnLogCategory" value="org.springframework.web.servlet.DispatcherServlet" />
+		<property name="exceptionAttribute" value="exception" />
+		<property name="exceptionMappings">
+			<map>
+				<entry key="org.openmrs.module.rwandaprimarycare.PrimaryCareException" value="module/rwandaprimarycare/primaryCareUncaughtException"/>
+			</map>
+		</property>
+	</bean>
+
+	<context:component-scan base-package="org.openmrs.module.rwandaprimarycare" />
+	
+	<bean class="org.openmrs.module.rwandaprimarycare.RwandaPrimaryCareContextAware" />
+    
+</beans>

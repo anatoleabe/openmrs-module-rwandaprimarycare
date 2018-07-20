@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <patient patient_id="40" tribe="2" creator="1" date_created="2005-09-22 00:00:00.0" changed_by="1" date_changed="2008-08-18 12:29:59.0" voided="false" void_reason=""/>
+  <patient patient_id="41" tribe="1" creator="1" date_created="2006-01-18 00:00:00.0" changed_by="1" date_changed="2008-08-18 12:25:31.0" voided="false" void_reason=",,,,"/>
+  <patient_identifier patient_id="40" identifier="101" identifier_type="2" preferred="0" location_id="1" creator="1" date_created="2005-09-22 00:00:00.0" voided="false" void_reason=""/>
+  <patient_identifier patient_id="41" identifier="12345K" identifier_type="2" preferred="0" location_id="3" creator="1" date_created="2008-08-18 11:44:54.0" voided="false" void_reason=""/>
+  <person person_id="40" gender="M" dead="false" creator="1" date_created="2005-09-22 00:00:00.0" voided="false" birthdate="1978-04-11 00:00:00" birthdate_estimated="false"/>
+  <person person_id="41" gender="M" dead="false" creator="1" date_created="2006-01-18 00:00:00.0" voided="false" birthdate="1973-02-24 00:00:00" birthdate_estimated="true"/>
+  <person_name person_name_id="4040" preferred="true" person_id="40" given_name="Darius" family_name="Jazayeri" creator="1" date_created="2005-09-22 00:00:00.0" voided="false" void_reason=""/>
+  <person_name person_name_id="4041" preferred="true" person_id="41" given_name="Dariush" family_name="Jazayeri" creator="1" date_created="2008-08-18 11:44:02.0" voided="false" void_reason=""/>
+</dataset>

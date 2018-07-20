@@ -1,0 +1,5 @@
+<table class="resultsTable  bigtext" style="position:relative;left:10%;">
+	<tr><Td colspan="2" height="1px"><hr/></td></tr>
+			<%@ include file="patientResults.jspf"%>
+	<tr><Td colspan="2" height="5px"><hr/></td></tr>
+</table>

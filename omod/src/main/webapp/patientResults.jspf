@@ -1,0 +1,94 @@
+
+			<openmrs:globalProperty key="registration.primaryIdentifierType" var="primaryRegistrationName"/>
+			
+			<c:set var="typeShown" value="0"/>	
+			<c:forEach var="id" items="${patient.identifiers}">
+				<tr>
+			
+					<c:if test="${id.identifierType.name ==  primaryRegistrationName}">
+						<c:if test="${typeShown == 1}">
+							<td align="right"> </td>
+						</c:if>
+						<c:if test="${typeShown == 0}">
+							<td align="right">${primaryRegistrationName}</td>
+							<c:set var="typeShown" value="1"/>
+						</c:if>
+						<th align="left">${id.identifier} (${id.location})</th>
+					</c:if>
+			
+				</tr>
+			</c:forEach>
+			<c:forEach var="id" items="${patient.identifiers}">
+			
+					<c:if test="${id.identifierType.name !=  primaryRegistrationName}">
+						<tr>
+						<td align="right">${id.identifierType.name}</td>
+						<th align="left">${id.identifier}</th>
+						</tr>
+					</c:if>
+			
+			</c:forEach>
+			<tr><td colspan="2"><hr/></td></tr>
+			<c:forEach var="attr" items="${patient.activeAttributes}">
+				<tr>
+					<td align="right">
+						${attr.attributeType.name}
+					</td>
+					<th align="left">${attr.hydratedObject}</th>
+				</tr>
+			</c:forEach>
+			<tr>
+				<td align="right"><spring:message code="rwandaprimarycare.touchscreen.rwandanName"/></td>
+				<th align="left">${patient.personName.familyName}</th>
+			</tr>
+			<tr>
+				<td align="right"><spring:message code="rwandaprimarycare.touchscreen.christianName"/></td>
+				<th align="left">${patient.personName.givenName}</th>
+			</tr>
+			<tr>
+				<td align="right"><spring:message code="rwandaprimarycare.touchscreen.gender"/></td>
+				<th align="left">
+					<c:if test="${patient.gender == 'M'}"><spring:message code="rwandaprimarycare.touchscreen.male"/></c:if>
+					<c:if test="${patient.gender == 'F'}"><spring:message code="rwandaprimarycare.touchscreen.female"/></c:if>
+				</th>
+			</tr>
+			<tr>
+				<td align="right"><spring:message code="rwandaprimarycare.touchscreen.birthdate"/></td>
+				<td align="left">
+					<b><c:if test="${patient.birthdateEstimated}">~</c:if><openmrs:formatDate date="${patient.birthdate}"/> (age: ${patient.age})</b><br/>
+				</td>
+			</tr>
+			 <c:if test="${fn:length(parents) > 0 }">
+			<tr>
+				<td align="right"><spring:message code="rwandaprimarycare.touchscreen.mom"/></td>
+				<th align="left">
+					<c:forEach items="${parents}" var="parent" varStatus="varStatus">
+						<c:if test="${parent.gender == 'F'}">
+							${parent.personName.familyName} &nbsp;
+						</c:if>
+					</c:forEach>
+				</th>
+			</tr>
+			<tr>
+				<td align="right"><spring:message code="rwandaprimarycare.touchscreen.dad"/></td>
+				<th align="left">
+					<c:forEach items="${parents}" var="parent" varStatus="varStatus">
+						<c:if test="${parent.gender == 'M'}">
+							${parent.personName.familyName} &nbsp;
+						</c:if>
+					</c:forEach>
+				</th>
+			</tr>
+			</c:if>
+			<tr>
+				<td align="right"><spring:message code="rwandaprimarycare.touchscreen.umudugudu"/></td>
+				<th align="left">
+					<c:if test="${!empty patient.addresses}">
+						<c:forEach items="${patient.addresses}" var="address" varStatus="varStatus">
+								<c:if test="${varStatus.index == 0}">
+									${address.address1}  &nbsp;
+								</c:if>
+						</c:forEach>	
+					</c:if>
+				</th>
+			</tr>

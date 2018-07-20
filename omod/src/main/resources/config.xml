@@ -1,0 +1,199 @@
+<module configVersion="1.0">
+	
+	<!-- Rwanda Primary Care  Module Properties -->
+	<id>@MODULE_ID@</id>
+	<name>@MODULE_NAME@</name>
+	<version>@MODULE_VERSION@</version>
+	<package>@MODULE_PACKAGE@</package>
+	<author>RBC,PIH</author>
+	<description>
+			The touch-screen module used in Rwanda for primary care registration.  Features the Boabab touchscreen
+			rendering library, as well as barcode printing.
+	</description>
+	<activator>@MODULE_PACKAGE@.RwandaPrimaryCareActivator</activator>
+	<require_version>1.9.11</require_version>
+	
+	<require_modules>
+		<require_module>org.openmrs.module.addresshierarchyrwanda</require_module>
+		<require_module>org.openmrs.module.idgen</require_module>
+		<require_module>org.openmrs.module.namephonetics</require_module>
+		<require_module>org.openmrs.module.mohappointment</require_module>
+	</require_modules>
+
+	<extension>
+		<point>org.openmrs.tracmodule.list</point>
+		<class>@MODULE_PACKAGE@.extension.html.AdminList</class>
+	</extension>
+
+	<extension>
+		<point>org.openmrs.admin.list</point>
+		<class>@MODULE_PACKAGE@.extension.html.AdminList</class>
+	</extension>
+
+	<globalProperty>
+		<property>registration.serviceRequestedConcept</property>
+		<defaultValue></defaultValue>
+		<description>
+			The conceptId for the services that a patient can come to the registration desk for.  
+		</description>
+	</globalProperty>
+	<globalProperty>
+		<property>registration.parentChildRelationshipTypeId</property>
+		<defaultValue></defaultValue>
+		<description>
+			The integer value of the parent to child relationship type id.  
+		</description>
+	</globalProperty>
+	<globalProperty>
+		<property>registration.primaryIdentifierType</property>
+		<defaultValue></defaultValue>
+		<description>
+			Must be the ID of a Patient Identifier Type. Newly created patients will
+			have an identifier of this type added to them. 
+		</description>
+	</globalProperty>
+	<globalProperty>
+		<property>registration.otherIdentifierTypes</property>
+		<defaultValue></defaultValue>
+		<description>
+			Optionally other patient identifier types that should can be searched on and displayed
+			on the patient page. This should be a comma-separated list of patient identifier ids.
+		</description>
+	</globalProperty>
+	<globalProperty>
+		<property>registration.restrictSearchByHealthCenter</property>
+		<defaultValue>true</defaultValue>
+		<description>
+			When searching for a patient by name, restrict the results to only patients for whom their 
+			health center is the location of the person using the touch-screen system.
+		</description>
+	</globalProperty>
+	<globalProperty>
+		<property>registration.maxRecentlyViewed</property>
+		<defaultValue>30</defaultValue>
+		<description>
+			The max length of the list on the touchscreen homepage or recently viewed patients.
+		</description>
+	</globalProperty>
+	<globalProperty>
+		<property>registration.nationalIdType</property>
+		<defaultValue>Old Identification Number</defaultValue>
+		<description>
+			The name of the patient identifier type to use for the national ID number.  If null, national ID isn't asked by the application.
+		</description>
+	</globalProperty>
+	<globalProperty>
+		<property>registration.mutuellePersonAttribute</property>
+		<defaultValue>Tipo de Participante</defaultValue>
+		<description>
+			The name of the person attribute type to use for the mutuelle number for a patient.  If null, mutuelle isn't asked by the application.
+		</description>
+	</globalProperty>
+	<globalProperty>
+		<property>registration.healthCenterPersonAttribute</property>
+		<defaultValue>Health Center</defaultValue>
+		<description>
+			The name of the person attribute type to use for the health center for a patient.
+		</description>
+	</globalProperty>
+	<globalProperty>
+		<property>registration.rwandaLocationCodes</property>
+		<defaultValue></defaultValue>
+		<description>
+			location_Name:MOH_ID pairs.  All pairs are pipe delimited.  NO VALUE THAT YOU ENTER HERE SHOULD BE DUPLICATED ACROSS MULTIPLE SERVERS.
+		</description>
+	</globalProperty>
+		<globalProperty>
+		<property>registration.defaultLocationCode</property>
+		<defaultValue>416</defaultValue>
+		<description>
+			The MOH 3-digit numeric code for the location of this health center.  NO VALUE THAT YOU ENTER HERE SHOULD BE DUPLICATED ACROSS MULTIPLE SERVERS.
+		</description>
+	</globalProperty>
+	<globalProperty>
+		<property>registration.barCodeCount</property>
+		<defaultValue>4</defaultValue>
+		<description>
+			The number of barcodes to print at a time, when printing barcodes.
+		</description>
+	</globalProperty>
+	<globalProperty>
+		<property>registration.insuranceTypeConcept</property>
+		<defaultValue></defaultValue>
+		<description>
+			The conceptID for insurance type
+		</description>
+	</globalProperty>
+	<globalProperty>
+		<property>registration.insuranceTypeConceptAnswers</property>
+		<defaultValue></defaultValue>
+		<description>
+			A list of the concept answers in the order that you'd like to see them for insuranceTypeConcept.  comma delimited
+		</description>
+	</globalProperty>
+	<globalProperty>
+		<property>registration.insuranceNumberConcept</property>
+		<defaultValue></defaultValue>
+		<description>
+			The conceptID for insurance number
+		</description>
+	</globalProperty>
+	<globalProperty>
+		<property>registration.showDiagnosisLink</property>
+		<defaultValue>false</defaultValue>
+		<description>
+			If set to true buttons directing to the Diagnosis Capture module will be displayed
+		</description>
+	</globalProperty>
+	
+	<globalProperty>
+		<property>registration.overrideHealthCenterAttribute</property>
+		<defaultValue>true</defaultValue>
+		<description>
+			If set to true this will cause the health center attribute for the patient to be overwritten with the location of the registration visit
+		</description>
+	</globalProperty>
+	
+	<globalProperty>
+		<property>registration.allowBackEntry</property>
+		<defaultValue>false</defaultValue>
+		<description>
+			If set to true this will allow the clerk to back enter registration data for previous days.
+		</description>
+	</globalProperty>
+	
+	<globalProperty>
+	    <property>registration.backEntryLimit</property>
+	    <defaultValue>14</defaultValue>
+		<description>The number of days allowable to back enter registration data</description>	
+	</globalProperty>
+	
+	<dwr>
+		<allow>
+			<create creator="new" javascript="RwandaDWRService">
+				<param name="class" value="org.openmrs.module.rwandaprimarycare.dwr.PrimaryCareDWRService"/>
+				<include method="getAddressHierarchyId"/>
+				<include method="getMessage"/>
+				<include method="getMessages"/>
+			</create>						
+		</allow>
+		
+		<signatures>
+			<![CDATA[  ]]>
+		</signatures>	
+	</dwr>
+	
+	<!-- /Required Global Properties -->
+
+	<!-- Internationalization -->
+	
+	<messages>
+		<lang>en</lang>
+		<file>messages.properties</file>
+	</messages>
+	<messages>
+		<lang>rw</lang>
+		<file>messages_rw.properties</file>
+	</messages>
+	
+</module>
