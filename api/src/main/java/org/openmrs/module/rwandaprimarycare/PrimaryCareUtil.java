@@ -279,7 +279,7 @@ public class PrimaryCareUtil {
             IdentifierSource is = iss.getAutoGenerationOption(pit).getSource();
             if (is instanceof SequentialIdentifierGenerator){
                 SequentialIdentifierGenerator sig = (SequentialIdentifierGenerator) is;
-                if (identifierStr.length() != sig.getLength().intValue())
+                if (identifierStr.length() != sig.getMaxLength().intValue())
                     return false;
             }
         } catch (Exception ex){

@@ -26,8 +26,8 @@
 		<openMRSVersion>1.9.11</openMRSVersion>
 		<htmlformentryVersion>1.9.3</htmlformentryVersion>
 		<addresshierarchyrwandaVersion>1.2.9-SNAPSHOT</addresshierarchyrwandaVersion>
-		<idgenVersion>2.2</idgenVersion>
-		<namephoneticsVersion>1.6.0</namephoneticsVersion>
+		<idgenVersion>4.0</idgenVersion>
+		<namephoneticsVersion>1.5</namephoneticsVersion>
 		<mohappointmentVersion>0.3-SNAPSHOT</mohappointmentVersion>
 	</properties>
 
@@ -95,6 +95,15 @@
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.openmrs.module</groupId>
+			<artifactId>mohappointment-api</artifactId>
+			<version>${mohappointmentVersion}</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+
 	</dependencies>
 
 	<distributionManagement>
