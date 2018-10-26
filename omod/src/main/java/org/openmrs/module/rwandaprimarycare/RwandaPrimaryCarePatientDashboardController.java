@@ -172,7 +172,9 @@ public class RwandaPrimaryCarePatientDashboardController {
 	                o.setValueCoded(Context.getConceptService().getConcept(serviceRequestResponse));
 	                registrationEncounterToday.addObs(o);
 	                registrationEncounterToday = PrimaryCareBusinessLogic.saveEncounterAndVerifyVisit(registrationEncounterToday);
-	            } else {
+					PrimaryCareUtil.createWaitingAppointment(registrationEncounterToday.getProvider(), registrationEncounterToday, o, session, Context.getConceptService().getConcept(serviceRequestResponse));
+
+				} else {
 	            	//edit existing obs
 	            	int count = 0;
 	            	for (Obs o : registrationEncounterToday.getObs()){
@@ -181,6 +183,7 @@ public class RwandaPrimaryCarePatientDashboardController {
 	            				//update the service
 		            			o.setValueCoded(Context.getConceptService().getConcept(serviceRequestResponse));
 		            			registrationEncounterToday = PrimaryCareBusinessLogic.saveEncounterAndVerifyVisit(registrationEncounterToday);
+								PrimaryCareUtil.createWaitingAppointment(registrationEncounterToday.getProvider(), registrationEncounterToday, o, session, Context.getConceptService().getConcept(serviceRequestResponse));
 	            			} else {
 	            				//void the duplicate
 	            				Context.getObsService().voidObs(o, "duplicate service requested in touchscreen app");

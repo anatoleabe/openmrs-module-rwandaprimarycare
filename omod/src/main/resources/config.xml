@@ -32,18 +32,29 @@
 
 	<globalProperty>
 		<property>registration.serviceRequestedConcept</property>
-		<defaultValue></defaultValue>
+		<defaultValue>6702</defaultValue>
 		<description>
 			The conceptId for the services that a patient can come to the registration desk for.  
 		</description>
 	</globalProperty>
 	<globalProperty>
 		<property>registration.parentChildRelationshipTypeId</property>
-		<defaultValue></defaultValue>
+		<defaultValue>3</defaultValue>
 		<description>
 			The integer value of the parent to child relationship type id.  
 		</description>
 	</globalProperty>
+
+	<globalProperty>
+		<property>registration.serviceRequestedConceptAnswers</property>
+		<defaultValue>8056,8055,8054,8053,6713,6712,6711,6710,10826,12249,12250,12247,2716,12251,12246,12252,6708,5483,1845,12248,11397,10873</defaultValue>
+		<description>
+			The conceptIds for the services that a patient can come to the registration desk for,
+			and those have to be available to this location.
+		</description>
+	</globalProperty>
+
+
 	<globalProperty>
 		<property>registration.primaryIdentifierType</property>
 		<defaultValue></defaultValue>
@@ -119,21 +130,21 @@
 	</globalProperty>
 	<globalProperty>
 		<property>registration.insuranceTypeConcept</property>
-		<defaultValue></defaultValue>
+		<defaultValue>6740</defaultValue>
 		<description>
 			The conceptID for insurance type
 		</description>
 	</globalProperty>
 	<globalProperty>
 		<property>registration.insuranceTypeConceptAnswers</property>
-		<defaultValue></defaultValue>
+		<defaultValue>1107,6738,6739,6955,6956,6957</defaultValue>
 		<description>
 			A list of the concept answers in the order that you'd like to see them for insuranceTypeConcept.  comma delimited
 		</description>
 	</globalProperty>
 	<globalProperty>
 		<property>registration.insuranceNumberConcept</property>
-		<defaultValue></defaultValue>
+		<defaultValue>6741</defaultValue>
 		<description>
 			The conceptID for insurance number
 		</description>
