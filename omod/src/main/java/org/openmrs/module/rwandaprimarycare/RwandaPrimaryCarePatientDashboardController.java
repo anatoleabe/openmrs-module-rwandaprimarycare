@@ -22,6 +22,7 @@ import org.openmrs.PatientIdentifierType;
 import org.openmrs.Person;
 import org.openmrs.PersonAttribute;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.mohappointment.utils.AppointmentUtil;
 import org.openmrs.util.OpenmrsUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -183,6 +184,7 @@ public class RwandaPrimaryCarePatientDashboardController {
 	            				//update the service
 		            			o.setValueCoded(Context.getConceptService().getConcept(serviceRequestResponse));
 		            			registrationEncounterToday = PrimaryCareBusinessLogic.saveEncounterAndVerifyVisit(registrationEncounterToday);
+								AppointmentUtil.voidAppointmentByObs(o);
 								PrimaryCareUtil.createWaitingAppointment(registrationEncounterToday.getProvider(), registrationEncounterToday, o, session, Context.getConceptService().getConcept(serviceRequestResponse));
 	            			} else {
 	            				//void the duplicate
