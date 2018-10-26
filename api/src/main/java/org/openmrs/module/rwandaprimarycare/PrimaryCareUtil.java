@@ -553,7 +553,7 @@ public class PrimaryCareUtil {
         waitingAppointment.setProvider(provider);
         waitingAppointment.setEncounter(encounter);
         waitingAppointment.setReason(obs);
-        waitingAppointment.setNote("This is a waiting patient to the Consultation");
+        waitingAppointment.setNote("This is a waiting patient to the "+obs.getConcept().getName().toString());
         waitingAppointment.setPatient(encounter.getPatient());
         waitingAppointment.setLocation(PrimaryCareBusinessLogic.getLocationLoggedIn(session));
         waitingAppointment.setService(AppointmentUtil.getServiceByConcept(serviceConcept));
