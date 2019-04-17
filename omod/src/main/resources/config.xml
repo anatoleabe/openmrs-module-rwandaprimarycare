@@ -172,6 +172,48 @@
 			If set to true this will allow the clerk to back enter registration data for previous days.
 		</description>
 	</globalProperty>
+
+
+
+	<globalProperty>
+		<property>registration.concept.SYSTOLICBLOODPRESSURE</property>
+		<defaultValue>3ce934fa-26fe-102b-80cb-0017a47871b2</defaultValue>
+		<description>
+			Concept id or UUID for SYSTOLIC BLOOD PRESSURE.
+		</description>
+	</globalProperty>
+	<globalProperty>
+	<property>registration.concept.DIASTOLICBLOODPRESSURE</property>
+	<defaultValue>3ce93694-26fe-102b-80cb-0017a47871b2</defaultValue>
+	<description>
+		Concept id or UUID for DIASTOLIC BLOOD PRESSURE.
+	</description>
+	</globalProperty>
+	<globalProperty>
+		<property>registration.concept.PULSE</property>
+		<defaultValue>3ce93824-26fe-102b-80cb-0017a47871b2</defaultValue>
+		<description>
+			Concept id or UUID for PULSE.
+		</description>
+	</globalProperty>
+	<globalProperty>
+		<property>registration.concept.RESPIRATORYRATE</property>
+		<defaultValue>3ceb11f8-26fe-102b-80cb-0017a47871b2</defaultValue>
+		<description>
+			Concept id or UUID for RESPIRATORY RATE.
+		</description>
+	</globalProperty>
+	<globalProperty>
+		<property>registration.concept.BloodOxygenSaturation</property>
+		<defaultValue>3ce9401c-26fe-102b-80cb-0017a47871b2</defaultValue>
+		<description>
+			Concept id or UUID for Blood Oxygen Saturation.
+		</description>
+	</globalProperty>
+
+
+
+
 	
 	<globalProperty>
 	    <property>registration.backEntryLimit</property>

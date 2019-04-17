@@ -70,6 +70,13 @@ public class EnterSimpleEncounterController {
 	        	}
 	        }
 	        questions.add(new Question(heightMsg.toString(), PrimaryCareBusinessLogic.getHeightConcept(), false));
+
+			questions.add(new Question(msa.getMessage("rwandaprimarycare.SYSTOLICBLOODPRESSURE"), PrimaryCareBusinessLogic.getSystolicBloodPressureConcept(), false));
+			questions.add(new Question(msa.getMessage("rwandaprimarycare.DIASTOLICBLOODPRESSURE"), PrimaryCareBusinessLogic.getDiastolicBloodPressureConcept(), false));
+			questions.add(new Question(msa.getMessage("rwandaprimarycare.PULSE"), PrimaryCareBusinessLogic.getPulseConcept(), false));
+			questions.add(new Question(msa.getMessage("rwandaprimarycare.RESPIRATORYRATE"), PrimaryCareBusinessLogic.getRespirationRateConcept(), false));
+			questions.add(new Question(msa.getMessage("rwandaprimarycare.BloodOxygenSaturation"), PrimaryCareBusinessLogic.getBloodOxygenSaturationConcept(), false));
+
 	        model.addAttribute("questions", questions);
 	        
 	        if(visitDate != null)

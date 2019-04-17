@@ -287,6 +287,100 @@ public class PrimaryCareBusinessLogic {
         }
         return concept;
     }
+
+
+    public static Concept getSystolicBloodPressureConcept() {
+        Concept concept = null;
+        String gp = Context.getAdministrationService().getGlobalProperty("registration.concept.SYSTOLICBLOODPRESSURE");
+        if (gp == null)
+            throw new RuntimeException("You must set the global property registration.concept.SYSTOLICBLOODPRESSURE.");
+        concept = Context.getConceptService().getConceptByUuid(gp);
+        if (concept == null){
+            try {
+                concept = Context.getConceptService().getConcept(Integer.valueOf(gp));
+            } catch (Exception ex) { }
+            if (concept == null) {
+                throw new RuntimeException("Cannot find concept specified by global property registration.concept.SYSTOLICBLOODPRESSURE");
+            }
+        }
+        return concept;
+    }
+
+
+    public static Concept getDiastolicBloodPressureConcept() {
+        Concept concept = null;
+        String gp = Context.getAdministrationService().getGlobalProperty("registration.concept.DIASTOLICBLOODPRESSURE");
+        if (gp == null)
+            throw new RuntimeException("You must set the global property registration.concept.DIASTOLICBLOODPRESSURE.");
+        concept = Context.getConceptService().getConceptByUuid(gp);
+        if (concept == null){
+            try {
+                concept = Context.getConceptService().getConcept(Integer.valueOf(gp));
+            } catch (Exception ex) { }
+            if (concept == null) {
+                throw new RuntimeException("Cannot find concept specified by global property registration.concept.DIASTOLICBLOODPRESSURE");
+            }
+        }
+        return concept;
+    }
+
+    public static Concept getPulseConcept() {
+        Concept concept = null;
+        String gp = Context.getAdministrationService().getGlobalProperty("registration.concept.PULSE");
+        if (gp == null)
+            throw new RuntimeException("You must set the global property registration.concept.PULSE.");
+        concept = Context.getConceptService().getConceptByUuid(gp);
+        if (concept == null){
+            try {
+                concept = Context.getConceptService().getConcept(Integer.valueOf(gp));
+            } catch (Exception ex) { }
+            if (concept == null) {
+                throw new RuntimeException("Cannot find concept specified by global property registration.concept.PULSE");
+            }
+        }
+        return concept;
+    }
+
+    public static Concept getRespirationRateConcept() {
+        Concept concept = null;
+        String gp = Context.getAdministrationService().getGlobalProperty("registration.concept.RESPIRATORYRATE");
+        if (gp == null)
+            throw new RuntimeException("You must set the global property registration.concept.RESPIRATORYRATE.");
+        concept = Context.getConceptService().getConceptByUuid(gp);
+        if (concept == null){
+            try {
+                concept = Context.getConceptService().getConcept(Integer.valueOf(gp));
+            } catch (Exception ex) { }
+            if (concept == null) {
+                throw new RuntimeException("Cannot find concept specified by global property registration.concept.RESPIRATORYRATE");
+            }
+        }
+        return concept;
+    }
+
+    public static Concept getBloodOxygenSaturationConcept() {
+        Concept concept = null;
+        String gp = Context.getAdministrationService().getGlobalProperty("registration.concept.BloodOxygenSaturation");
+        if (gp == null)
+            throw new RuntimeException("You must set the global property registration.concept.BloodOxygenSaturation.");
+        concept = Context.getConceptService().getConceptByUuid(gp);
+        if (concept == null){
+            try {
+                concept = Context.getConceptService().getConcept(Integer.valueOf(gp));
+            } catch (Exception ex) { }
+            if (concept == null) {
+                throw new RuntimeException("Cannot find concept specified by global property registration.concept.BloodOxygenSaturation");
+            }
+        }
+        return concept;
+    }
+
+
+
+
+
+
+
     
     public static Concept getDiagnosisNonCodedConcept() {
         Concept concept = null;

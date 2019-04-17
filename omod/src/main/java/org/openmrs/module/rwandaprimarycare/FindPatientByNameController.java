@@ -111,7 +111,12 @@ public class FindPatientByNameController {
 	            
 	            
 	            List<Patient> patients = PrimaryCareBusinessLogic.getPatientWithSoundex(searchFANAME, searchRWNAME, PrimaryCareBusinessLogic.getLocationLoggedIn(request.getSession()), searchUMUDUGUDU);
-	            
+
+	            if(patients.size()==0){
+					patients = PrimaryCareBusinessLogic.getPatientWithSoundex(searchRWNAME, searchFANAME, PrimaryCareBusinessLogic.getLocationLoggedIn(request.getSession()), searchUMUDUGUDU);
+
+				}
+
 	            model.addAttribute("results", patients);
 	            model.addAttribute("identifierTypes", PrimaryCareBusinessLogic.getPatientIdentifierTypesToUse());
 	        }
