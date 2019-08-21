@@ -20,7 +20,12 @@
     <br/>
     <br/>
     <br/>
-    <span style="font-size: 15pt;">No correspondence found from NIDA. Check the national id you entered.</span>
+    <c:if test="${nidaResult == 'NOTFOUND'}">
+        <span style="font-size: 15pt;">No correspondence found from NIDA. Check the national id you entered.</span>
+    </c:if>
+    <c:if test="${nidaResult == 'INUSE'}">
+        <span style="font-size: 15pt;">${errorMsg}</span>
+    </c:if>
     <c:if test="${fn:length(results) == 0}">
         <br/>
         <br/>

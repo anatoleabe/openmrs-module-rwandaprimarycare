@@ -57,6 +57,10 @@ public class FindUserFromNIDAByIdController {
                 
                 JsonParser parser = new JsonParser();
                 JsonObject jsonnida = (JsonObject) parser.parse(result);
+                if (jsonnida.get("documentNumber") == null || (jsonnida.get("documentNumber") != null && "null".equals(jsonnida.get("documentNumber").toString()))){
+                    jsonnida.addProperty("documentNumber", search);
+                }
+                
 
                 CreateNewPatientController createNewPatientController = new CreateNewPatientController();
 
@@ -70,7 +74,14 @@ public class FindUserFromNIDAByIdController {
         } catch (ParseException e) {
             throw new PrimaryCareException(e);
         } catch (PrimaryCareException e) {
-            throw new PrimaryCareException(e);
+            boolean isInUse = e.getMessage().contains("already in use by another patient");
+            if (isInUse){
+                model.addAttribute("nidaResult", "INUSE");
+                model.addAttribute("errorMsg", e.getMessage());
+                return "/module/rwandaprimarycare/findUserFromNIDAById";
+            }else{
+                throw new PrimaryCareException(e);
+            }
         } catch (RestClientException e) {
             throw new PrimaryCareException(e);
         }

@@ -85,6 +85,9 @@
         <c:param name="addIdentifier" value="${addIdentifier}"/>
     </c:url>
     
+    <c:set var="nfcm"><spring:message code='rwandaprimarycare.touchscreen.notFoundNewPatientManually' /></c:set>
+    <touchscreen:button label="${nfcm}" href="${createHref}"/>
+    <span> &nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;&nbsp; </span>
     <c:set var="ffnida"><spring:message code='rwandaprimarycare.touchscreen.findCreateUserFromNIDA' /></c:set>
     <touchscreen:button label="${ffnida}" href="${findInNIDAHref}"/>
 </c:if>

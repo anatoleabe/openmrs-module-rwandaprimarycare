@@ -1,5 +1,6 @@
 package org.openmrs.module.rwandaprimarycare;
 
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.text.SimpleDateFormat;
@@ -88,41 +89,51 @@ public class PrimaryCareServiceTest extends BaseModuleContextSensitiveTest {
 //        System.out.println(PrimaryCareUtil.getDOBYearFromNationalId(nationalIdShort));
 //        System.out.println(PrimaryCareUtil.getGenderFromNationalId(nationalIdShort));
 
-        final String uri = "http://130.104.12.92:5001/persons/?id=1198980059984253";
-        RestTemplate restTemplate = new RestTemplate();
-        
-        String plainCreds = "openmrs:saviors";
-        byte[] plainCredsBytes = plainCreds.getBytes();
-        byte[] base64CredsBytes = Base64.encodeBase64(plainCredsBytes);
-        String base64Creds = new String(base64CredsBytes);
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "Basic " + base64Creds);
-        HttpEntity<String> request = new HttpEntity<String>(headers);
-        ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.GET, request, String.class);
-        String result = response.getBody();
-
-        System.out.println(result);
-        
-        JsonParser parser = new JsonParser();
-        JsonObject jsonnida = (JsonObject) parser.parse(result);
-        System.out.println("dateOfBirth = "+jsonnida.get("dateOfBirth").getAsString());
-        Date birthdate=new SimpleDateFormat("dd/MM/yyyy").parse(jsonnida.get("dateOfBirth").getAsString()); 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(birthdate);
-        Integer birthdateDay = calendar.get(Calendar.DAY_OF_MONTH);
-        Integer birthdateMonth = calendar.get(Calendar.MONTH)+1;
-        Integer birthdateYear = calendar.get(Calendar.YEAR);
-        
-        System.out.println("birthdate = "+birthdate);
-        System.out.println("Day = "+birthdateDay);
-        System.out.println("Month = "+birthdateMonth);
-        System.out.println("Year = "+birthdateYear);
-        
-        Integer age = getAge(birthdate); //uses original search param
-        
-        System.out.println("Age = "+age);
-
+//        final String uri = "http://130.104.12.92:5001/persons/?id=1195582042830097";
+//        RestTemplate restTemplate = new RestTemplate();
+//        
+//        String plainCreds = "openmrs:saviors";
+//        byte[] plainCredsBytes = plainCreds.getBytes();
+//        byte[] base64CredsBytes = Base64.encodeBase64(plainCredsBytes);
+//        String base64Creds = new String(base64CredsBytes);
+//
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.add("Authorization", "Basic " + base64Creds);
+//        HttpEntity<String> request = new HttpEntity<String>(headers);
+//        ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.GET, request, String.class);
+//        String result = response.getBody();
+//
+//        System.out.println(result);
+//        
+//        JsonParser parser = new JsonParser();
+//        JsonObject jsonnida = (JsonObject) parser.parse(result);
+//        
+//        System.out.println(jsonnida);
+//        JsonNull jnull = null;
+//        if (jsonnida.get("documentNumber") == null || (jsonnida.get("documentNumber") != null && "null".equals(jsonnida.get("documentNumber").toString()))){
+//            jsonnida.addProperty("documentNumber", "1195582042830097");
+//        }
+//        System.out.println("============");
+//        System.out.println(jsonnida);
+//        System.out.println("============");
+//        System.out.println("============");
+//        System.out.println("dateOfBirth = "+jsonnida.get("dateOfBirth").getAsString());
+//        Date birthdate=new SimpleDateFormat("dd/MM/yyyy").parse(jsonnida.get("dateOfBirth").getAsString()); 
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.setTime(birthdate);
+//        Integer birthdateDay = calendar.get(Calendar.DAY_OF_MONTH);
+//        Integer birthdateMonth = calendar.get(Calendar.MONTH)+1;
+//        Integer birthdateYear = calendar.get(Calendar.YEAR);
+//        
+//        System.out.println("birthdate = "+birthdate);
+//        System.out.println("Day = "+birthdateDay);
+//        System.out.println("Month = "+birthdateMonth);
+//        System.out.println("Year = "+birthdateYear);
+//        
+//        Integer age = getAge(birthdate); //uses original search param
+//        
+//        System.out.println("Age = "+age);
+        System.out.println("Year = ");
     }
     
     
