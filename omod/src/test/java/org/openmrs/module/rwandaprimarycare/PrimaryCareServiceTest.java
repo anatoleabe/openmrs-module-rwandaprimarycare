@@ -11,6 +11,9 @@ import java.util.Date;
 import org.apache.commons.codec.binary.Base64;
 import org.junit.Assert;
 import org.junit.Test;
+import org.openmrs.PatientIdentifier;
+import org.openmrs.PatientIdentifierType;
+import org.openmrs.api.context.Context;
 import org.openmrs.test.BaseModuleContextSensitiveTest;
 import org.openmrs.module.rwandaprimarycare.PrimaryCareUtil;
 import org.springframework.http.HttpEntity;
@@ -133,10 +136,9 @@ public class PrimaryCareServiceTest extends BaseModuleContextSensitiveTest {
 //        Integer age = getAge(birthdate); //uses original search param
 //        
 //        System.out.println("Age = "+age);
-        System.out.println("Year = ");
+        
     }
-    
-    
+
     public int getAge(Date dateOfBirth) {
         int age = 0;
         Calendar born = Calendar.getInstance();

@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class CreateNewPatientController {
 
     protected final Log log = LogFactory.getLog(getClass());
-    private boolean isCommingFrimNIDA = false;
+    private boolean isCommingFromNIDA = false;
 
     @RequestMapping(method = RequestMethod.GET)
     public String confirmIdNumber(
@@ -157,7 +157,7 @@ public class CreateNewPatientController {
         String mothersName = patientObject.get("motherNames").getAsString();
         String fathersName = patientObject.get("fatherNames").getAsString();
 
-        isCommingFrimNIDA = isNidaData;
+        isCommingFromNIDA = isNidaData;
 
         return createPatient(
                 addNationalIdentifier,
@@ -341,12 +341,13 @@ public class CreateNewPatientController {
             }
 
             if (addNationalIdentifier != null && !addNationalIdentifier.trim().equals("")) {
-                PatientIdentifierType natIdType = PrimaryCareUtil.getNationalIdIdentifierType();
+                //PatientIdentifierType natIdType = PrimaryCareUtil.getNationalIdIdentifierType();
+                PatientIdentifierType natIdType = new PatientIdentifierType(5);//5 is the PatientIdentifierType id
                 if (natIdType != null) {
                     newPatient.addIdentifier(new PatientIdentifier(PrimaryCareUtil.getIdNumFromNationalId(addNationalIdentifier),
                             natIdType, PrimaryCareWebLogic.getCurrentLocation(session)));
 
-                    if (!isCommingFrimNIDA) {
+                    if (!isCommingFromNIDA) {
                         String givenNameNI = PrimaryCareUtil.getGivenNameFromNationalId(addNationalIdentifier);
                         String familyNameNI = PrimaryCareUtil.getFamilyNameFromNationalId(addNationalIdentifier);
 

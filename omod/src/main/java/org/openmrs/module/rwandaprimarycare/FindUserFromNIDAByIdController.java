@@ -29,12 +29,19 @@ public class FindUserFromNIDAByIdController {
     final static int MAX_RESULTS = 10;
 
     @RequestMapping("/module/rwandaprimarycare/findUserFromNIDAById")
-    public String setupForm(@RequestParam(value = "search", required = false) String search, HttpSession session, ModelMap model) throws PrimaryCareException {
+    public String setupForm(@RequestParam(value = "search", required = false) String search, 
+            @RequestParam(required = false, value = "nidaValidatedData") String nidaData, HttpSession session, ModelMap model) throws PrimaryCareException {
         //LK: Need to ensure that all primary care methods only throw a PrimaryCareException
         //So that errors will be directed to a touch screen error page
 
         try {
-            if (search != null && !search.equals("")) {
+            if (nidaData != null){//After validation
+                JsonParser parser = new JsonParser();
+                JsonObject jsonnida = (JsonObject) parser.parse(nidaData);
+                CreateNewPatientController createNewPatientController = new CreateNewPatientController();
+
+                return createNewPatientController.createPatient(jsonnida, session, true);
+            } else if (search != null && !search.equals("")) {
 
                 model.addAttribute("search", search);
                 //model.addAttribute("results", PrimaryCareBusinessLogic.findPatientsByIdentifier(search, PrimaryCareBusinessLogic.getLocationLoggedIn(session)));
@@ -54,17 +61,20 @@ public class FindUserFromNIDAByIdController {
                 HttpEntity<String> request = new HttpEntity<String>(headers);
                 ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.GET, request, String.class);
                 String result = response.getBody();
-                
+
                 JsonParser parser = new JsonParser();
                 JsonObject jsonnida = (JsonObject) parser.parse(result);
-                if (jsonnida.get("documentNumber") == null || (jsonnida.get("documentNumber") != null && "null".equals(jsonnida.get("documentNumber").toString()))){
+                if (jsonnida.get("documentNumber") == null || (jsonnida.get("documentNumber") != null && "null".equals(jsonnida.get("documentNumber").toString()))) {
                     jsonnida.addProperty("documentNumber", search);
                 }
-                
+                jsonnida.remove("photo");
+                jsonnida.remove("signature");
 
-                CreateNewPatientController createNewPatientController = new CreateNewPatientController();
-
-                return createNewPatientController.createPatient(jsonnida, session, true);
+                model.addAttribute("nidaResult", "NIDAVALIDATION");
+                model.addAttribute("nidaDataString", jsonnida.toString());
+                model.addAttribute("nidaData", jsonnida);
+                return "/module/rwandaprimarycare/findUserFromNIDAById";
+	        
             } else {
                 return "/module/rwandaprimarycare/findUserFromNIDAById";
             }
@@ -75,11 +85,13 @@ public class FindUserFromNIDAByIdController {
             throw new PrimaryCareException(e);
         } catch (PrimaryCareException e) {
             boolean isInUse = e.getMessage().contains("already in use by another patient");
-            if (isInUse){
+            if (isInUse) {
+                JsonParser parser = new JsonParser();
+                JsonObject jsonnida = (JsonObject) parser.parse(nidaData);
                 model.addAttribute("nidaResult", "INUSE");
-                model.addAttribute("errorMsg", e.getMessage());
+                model.addAttribute("errorMsg", "Oups, a patient with NID number '"+jsonnida.get("documentNumber")+"' already exist.");
                 return "/module/rwandaprimarycare/findUserFromNIDAById";
-            }else{
+            } else {
                 throw new PrimaryCareException(e);
             }
         } catch (RestClientException e) {
