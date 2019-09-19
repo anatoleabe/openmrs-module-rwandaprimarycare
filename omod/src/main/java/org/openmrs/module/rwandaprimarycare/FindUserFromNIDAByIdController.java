@@ -48,7 +48,7 @@ public class FindUserFromNIDAByIdController {
                 //model.addAttribute("identifierTypes", PrimaryCareBusinessLogic.getPatientIdentifierTypesToUse());
 
                 search = search.trim().replace(" ", "");
-                final String uri = "http://130.104.12.92:5001/persons/?id=" + search;
+                final String uri = "http://openhim-core:5001/persons/?id=" + search;
                 RestTemplate restTemplate = new RestTemplate();
 
                 String plainCreds = "openmrs:saviors";

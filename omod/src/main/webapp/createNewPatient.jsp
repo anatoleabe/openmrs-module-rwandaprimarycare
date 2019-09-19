@@ -29,6 +29,19 @@
                         <input type="password" optional="true" helpText="<spring:message code='rwandaprimarycare.touchscreen.nationalIdNumberFor' /> ${fn:toUpperCase(param.familyName)} ${param.givenName}"  name="addNationalIdentifierCreate" value="${param.addNationalIdentifier}" field_Type="disabled" />
                 </td></tr>
         </c:if>-->
+        
+        <tr>
+                <td>Gender</td> 
+                <td>
+                    <c:set var="gender"><spring:message code='rwandaprimarycare.touchscreen.gender' /></c:set>
+                    <c:set var="male"><spring:message code='rwandaprimarycare.touchscreen.male' /></c:set>
+                    <c:set var="female"><spring:message code='rwandaprimarycare.touchscreen.female' /></c:set>
+                    <select optional="false" name="gender" label="${gender}" value="${param.gender}" helpText="${gender}">
+                        <option value="M">${male}</option>
+                        <option value="F">${female}</option>
+                    </select>
+                </td>
+            </tr>
 
         <tr><td>
                 <input type="password" optional="true" helpText="<spring:message code='rwandaprimarycare.touchscreen.existingPCId' />"  name="addPCIdentifier" value="" field_Type="disabled" />
@@ -47,6 +60,15 @@
                 <touchscreen:numberInput required="false" field_name="birthdateYearCreate" value="${param.birthdateYear}" label="${bYear} (${orLeaveBlank} ${param.age})" min="1910" max="2020"/>
             </Td>
         </tr>
+        
+        <tr>
+
+                <td>Age</td>
+                <c:set var="age"><spring:message code='rwandaprimarycare.touchscreen.age' /></c:set>
+                <td><touchscreen:numberInput required="true" label="${age}" field_name="age" value="" min="0" max="150"/></td>
+
+
+            </tr>
 
         <c:set var="CountryStr"><spring:message code='rwandaprimarycare.touchscreen.country' /></c:set>
         <c:set var="ProvinceStr"><spring:message code='rwandaprimarycare.touchscreen.province' /></c:set>
