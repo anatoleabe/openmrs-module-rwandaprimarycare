@@ -90,9 +90,9 @@ public class CreateNewPatientController {
             @RequestParam("familyNameCreate") String familyName,
             @RequestParam("gender") String gender, //NOTE: uses original search param, not 'Create' param
             @RequestParam("age") Integer age, //uses original search param
-            @RequestParam("birthdateDayCreate") Integer birthdateDay,
-            @RequestParam("birthdateMonthCreate") Integer birthdateMonth,
-            @RequestParam("birthdateYearCreate") Integer birthdateYear,
+            @RequestParam(required = false, value = "birthdateDayCreate") Integer birthdateDay,
+            @RequestParam(required = false, value = "birthdateMonthCreate") Integer birthdateMonth,
+            @RequestParam(required = false, value = "birthdateYearCreate") Integer birthdateYear,
             @RequestParam("COUNTRY") String country,
             @RequestParam("PROVINCE") String province,
             @RequestParam("DISTRICT") String district,

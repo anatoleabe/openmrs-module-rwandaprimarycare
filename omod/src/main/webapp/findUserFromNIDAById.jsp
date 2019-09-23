@@ -28,6 +28,7 @@
     <c:param name="sector" value="${param.SECTOR}"/>
     <c:param name="cell" value="${param.CELL}"/>
     <c:param name="address1" value="${param.UMUDUGUDU}"/>
+    <c:param name="fromnida" value="yes"/>
 </c:url>
 
 <table><tr><Td>
