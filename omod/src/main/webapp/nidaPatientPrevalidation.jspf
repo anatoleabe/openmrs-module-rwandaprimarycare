@@ -34,6 +34,12 @@
         </td>
     </tr>
     <tr>
+        <td align="right">Father's name	</td>
+        <td align="left">
+            <b>${nidaData.get('fatherNames').getAsString()}</b><br/>
+        </td>
+    </tr>
+    <tr>
         <td align="right">Umudugudu</td>
         <td align="left">
             <b>${nidaData.get('village').getAsString()}</b><br/>
