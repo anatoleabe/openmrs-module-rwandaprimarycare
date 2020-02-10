@@ -1,0 +1,49 @@
+
+<table class="resultsTable  bigtext" style=" padding:10px;">	
+    <tr><Td colspan="2" height="1px"><hr/></td></tr>
+    <tr>
+        <td align="right">NID number</td>
+        <th align="left">${nidaData.get('documentNumber').getAsString()}</th>
+    </tr>
+    <tr><Td colspan="2" height="1px"><hr/></td></tr>
+    <tr>
+        <td align="right"><spring:message code="rwandaprimarycare.touchscreen.rwandanName"/></td>
+        <th align="left">${nidaData.get('surnames').getAsString()}</th>
+    </tr>
+    <tr>
+        <td align="right"><spring:message code="rwandaprimarycare.touchscreen.christianName"/></td>
+        <th align="left">${nidaData.get('foreName').getAsString()}</th>
+    </tr>
+    <tr>
+        <td align="right"><spring:message code="rwandaprimarycare.touchscreen.gender"/></td>
+        <th align="left">
+            <c:if test="${nidaData.get('sex').getAsString() == 'M'}"><spring:message code="rwandaprimarycare.touchscreen.male"/></c:if>
+            <c:if test="${nidaData.get('sex').getAsString() == 'F'}"><spring:message code="rwandaprimarycare.touchscreen.female"/></c:if>
+        </th>
+    </tr>
+    <tr>
+        <td align="right"><spring:message code="rwandaprimarycare.touchscreen.birthdate"/></td>
+        <td align="left">
+            <b>${nidaData.get('dateOfBirth').getAsString()}</b><br/>
+        </td>
+    </tr>
+    <tr>
+        <td align="right">Mother's Name</td>
+        <td align="left">
+            <b>${nidaData.get('motherNames').getAsString()}</b><br/>
+        </td>
+    </tr>
+    <tr>
+        <td align="right">Father's name	</td>
+        <td align="left">
+            <b>${nidaData.get('fatherNames').getAsString()}</b><br/>
+        </td>
+    </tr>
+    <tr>
+        <td align="right">Umudugudu</td>
+        <td align="left">
+            <b>${nidaData.get('village').getAsString()}</b><br/>
+        </td>
+    </tr>
+    <tr><Td colspan="2" height="1px"><hr/></td></tr>
+</table> 

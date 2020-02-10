@@ -460,14 +460,16 @@ public class PrimaryCareUtil {
     }
     
     
-    
     //The following are Rwanda national ID specific as of July 29, 2010
     ////////////////////////////////////////////////////////////////////////////////////////
     public static String getIdNumFromNationalId(String nationalIdLong) {
         if (nationalIdLong.length() >= 21)
-            return nationalIdLong.substring(0, 21);
+            return nationalIdLong.substring(0, 21).replace(" ", "");
+        else if (nationalIdLong.length() == 16 || nationalIdLong.trim().replace(" ", "").length() == 16){
+            return nationalIdLong.trim().replace(" ", "");
+        }
         else
-            throw new RuntimeException("National ID Number must be at least 21 digits. Current length is " + nationalIdLong+".  You may need to reconfigure your scanner");
+            throw new RuntimeException("National ID Number you enter is not valid. Must be at least 16 digits. Current length is " + nationalIdLong+".  You may need to reconfigure your scanner");
     }
     
     public static Integer getDOBYearFromNationalId(String nationalIdLong){
