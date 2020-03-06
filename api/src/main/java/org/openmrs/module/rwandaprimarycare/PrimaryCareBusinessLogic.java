@@ -36,6 +36,11 @@ import org.openmrs.VisitType;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.idgen.IdentifierSource;
 import org.openmrs.module.idgen.service.IdentifierSourceService;
+import org.openmrs.module.mohbilling.businesslogic.InsurancePolicyUtil;
+import org.openmrs.module.mohbilling.businesslogic.InsuranceUtil;
+import org.openmrs.module.mohbilling.model.Beneficiary;
+import org.openmrs.module.mohbilling.model.Insurance;
+import org.openmrs.module.mohbilling.model.InsurancePolicy;
 import org.openmrs.module.namephonetics.NamePhoneticsService;
 
 
@@ -871,6 +876,6 @@ public class PrimaryCareBusinessLogic {
 		return Context.getEncounterService().saveEncounter(e);
 
 	}
-    
+
 
 }

@@ -197,14 +197,17 @@ public class RwandaPrimaryCarePatientDashboardController {
 	        }
 	        
 	        if (gatherInsurance != null && gatherInsurance.equals(0)){
-	            
+//				Person person = Context.getPersonService().getPerson(patient.getPatientId());
+				Date currentDate = new Date();
 	            model.addAttribute("mostRecentType", PrimaryCareBusinessLogic.getLastInsuranceType(patient));
 	            model.addAttribute("mostRecentInsuranceNumber", PrimaryCareBusinessLogic.getLastInsuranceNumber(patient));
-	            model.addAttribute("insuranceTypes", PrimaryCareBusinessLogic.getInsuranceTypeAnswers());
-	            
+//	            model.addAttribute("insuranceTypes", PrimaryCareBusinessLogic.getInsuranceTypeAnswers());
+//				model.addAttribute("insuranceTypes", PrimaryCareUtil.getAllInsurances(true,patient,currentDate));
+				model.addAttribute("PatientInsurancePolicy", PrimaryCareUtil.getPatientInsurancePolicies(patient,new Date()));
+
 	            return "/module/rwandaprimarycare/insuranceInformation";
 	        }    
-	
+
 	        if (insuranceType != null && registrationEncounterToday != null){
 	            	//for edit, just void
 	        		//TODO:  don't update Obs if you don't need to...

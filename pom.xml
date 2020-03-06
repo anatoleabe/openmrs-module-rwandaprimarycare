@@ -29,6 +29,7 @@
 		<idgenVersion>4.0</idgenVersion>
 		<namephoneticsVersion>1.5</namephoneticsVersion>
 		<mohappointmentVersion>0.3-SNAPSHOT</mohappointmentVersion>
+		<mohbillingVersion>0.0.4.7-SNAPSHOT</mohbillingVersion>
 	</properties>
 
 	<dependencies>
@@ -100,6 +101,13 @@
 			<groupId>org.openmrs.module</groupId>
 			<artifactId>mohappointment-api</artifactId>
 			<version>${mohappointmentVersion}</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openmrs.module</groupId>
+			<artifactId>mohbilling-api</artifactId>
+			<version>${mohbillingVersion}</version>
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>

@@ -3,15 +3,14 @@
 
 
 <form method="get">
-<table> 
+<table>
 	<tr><td></td>
 		<td>
 			
 			<select optional="false" name="insuranceType" label="<spring:message code='rwandaprimarycare.touchscreen.insuranceType'/>" helpText="<spring:message code='rwandaprimarycare.touchscreen.insuranceType'/>">
-					<c:forEach var="answer" items="${insuranceTypes}">
-						<option value="${answer.conceptId}"
-							<c:if test="${!empty answer && !empty mostRecentType && answer == mostRecentType}"> SELECTED </c:if>
-						>${answer.name}</option>
+					<c:forEach var="policy" items="${PatientInsurancePolicy}">
+                        <option value="${policy.getInsurance().getConcept()}"
+                        >${policy.getInsurance().getConcept().getName()}</option>
 					</c:forEach>
 			</select>
 		</td>

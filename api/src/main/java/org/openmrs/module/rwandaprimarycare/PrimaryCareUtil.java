@@ -26,6 +26,11 @@ import org.openmrs.api.context.Context;
 import org.openmrs.module.idgen.IdentifierSource;
 import org.openmrs.module.idgen.SequentialIdentifierGenerator;
 import org.openmrs.module.idgen.service.IdentifierSourceService;
+import org.openmrs.module.mohbilling.businesslogic.InsurancePolicyUtil;
+import org.openmrs.module.mohbilling.businesslogic.InsuranceUtil;
+import org.openmrs.module.mohbilling.model.Beneficiary;
+import org.openmrs.module.mohbilling.model.Insurance;
+import org.openmrs.module.mohbilling.model.InsurancePolicy;
 import org.openmrs.patient.IdentifierValidator;
 import org.openmrs.module.mohappointment.model.Appointment;
 import org.openmrs.module.mohappointment.utils.AppointmentUtil;
@@ -580,5 +585,33 @@ public class PrimaryCareUtil {
         }
 
         return selectedConcepts;
+    }
+    public static List<InsurancePolicy> getPatientInsurancePolicies(Patient patient, Date onDate){
+        List<InsurancePolicy> selectPatientInsurancePolicies = new ArrayList<InsurancePolicy>();
+
+        List<Beneficiary> beneficiaries = InsurancePolicyUtil.getBeneficiaryByPatient(patient);
+        for(Beneficiary ben : beneficiaries){
+            for(InsurancePolicy patientPolicy : InsurancePolicyUtil.getValidInsurancePolicyOnDate(ben,onDate)){
+                selectPatientInsurancePolicies.add(patientPolicy);
+            }
+        }
+
+        return selectPatientInsurancePolicies;
+    }
+    public static List<Insurance> getAllInsurances(boolean isValid,Patient patient, Date onDate){
+        List<Insurance> insurances = new ArrayList<Insurance>();
+        List<Beneficiary> beneficiaries = InsurancePolicyUtil.getBeneficiaryByPatient(patient);
+        for(Beneficiary ben : beneficiaries){
+            for(InsurancePolicy patientPolicy : InsurancePolicyUtil.getValidInsurancePolicyOnDate(ben,onDate)){
+                for(Insurance insurance : InsuranceUtil.getInsurances(isValid)){
+                    if(patientPolicy.getInsurance()==insurance){
+                        insurances.add(insurance);
+                    }
+                }
+            }
+        }
+
+
+        return insurances;
     }
 }

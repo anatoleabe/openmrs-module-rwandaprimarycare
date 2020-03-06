@@ -18,6 +18,7 @@
 		<require_module>org.openmrs.module.idgen</require_module>
 		<require_module>org.openmrs.module.namephonetics</require_module>
 		<require_module>org.openmrs.module.mohappointment</require_module>
+		<require_module>org.openmrs.module.mohbilling</require_module>
 	</require_modules>
 
 	<extension>

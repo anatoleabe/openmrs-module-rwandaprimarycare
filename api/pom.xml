@@ -39,6 +39,13 @@
 			<scope>provided</scope>
 			<version>${addresshierarchyrwandaVersion}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.openmrs.module</groupId>
+			<artifactId>mohbilling-api</artifactId>
+			<type>jar</type>
+			<scope>provided</scope>
+			<version>${mohbillingVersion}</version>
+		</dependency>
 	</dependencies>
 
 </project>
