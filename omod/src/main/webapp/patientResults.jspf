@@ -79,6 +79,22 @@
 					</c:forEach>
 				</th>
 			</tr>
+
+			<tr>
+            	<td align="right"><spring:message code="rwandaprimarycare.touchscreen.educationLevel"/></td>
+            	<th align="left">${patient.personName.educationLevel}</th>
+            </tr>
+
+            <tr>
+               	<td align="right"><spring:message code="rwandaprimarycare.touchscreen.professionInfo"/></td>
+               	<th align="left">${patient.personName.profession}</th>
+            </tr>
+
+            <tr>
+                <td align="right"><spring:message code="rwandaprimarycare.touchscreen.religion"/></td>
+                <th align="left">${patient.personName.religion}</th>
+            </tr>
+
 			</c:if>
 			<tr>
 				<td align="right"><spring:message code="rwandaprimarycare.touchscreen.umudugudu"/></td>

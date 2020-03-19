@@ -201,7 +201,6 @@ public class RwandaPrimaryCarePatientDashboardController {
 	            model.addAttribute("mostRecentType", PrimaryCareBusinessLogic.getLastInsuranceType(patient));
 	            model.addAttribute("mostRecentInsuranceNumber", PrimaryCareBusinessLogic.getLastInsuranceNumber(patient));
 	            model.addAttribute("insuranceTypes", PrimaryCareBusinessLogic.getInsuranceTypeAnswers());
-	            
 	            return "/module/rwandaprimarycare/insuranceInformation";
 	        }    
 	
