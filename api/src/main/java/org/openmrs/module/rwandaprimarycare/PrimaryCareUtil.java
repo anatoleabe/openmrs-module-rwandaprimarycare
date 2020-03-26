@@ -547,7 +547,7 @@ public class PrimaryCareUtil {
     /**
      * Creates waiting appointment in different services
      *
-     * @param patient
+     * @param  patient
      */
     public static void createWaitingAppointment(Person provider, Encounter encounter, Obs obs, HttpSession session, Concept serviceConcept) {
         Appointment waitingAppointment = new Appointment();
@@ -585,18 +585,36 @@ public class PrimaryCareUtil {
         }
 
         return selectedConcepts;
-    }
-    public static List<InsurancePolicy> getPatientInsurancePolicies(Patient patient, Date onDate){
-        List<InsurancePolicy> selectPatientInsurancePolicies = new ArrayList<InsurancePolicy>();
-
+   }
+    /*public static List<InsurancePolicy> getInsurancePolicyByCardNo(Patient patient,Date onDate){
+        List<InsurancePolicy> allCard = new ArrayList<InsurancePolicy>();
         List<Beneficiary> beneficiaries = InsurancePolicyUtil.getBeneficiaryByPatient(patient);
         for(Beneficiary ben : beneficiaries){
             for(InsurancePolicy patientPolicy : InsurancePolicyUtil.getValidInsurancePolicyOnDate(ben,onDate)){
-                selectPatientInsurancePolicies.add(patientPolicy);
+                if (patientPolicy.getInsuranceCardNo().equals(ben.getPolicyIdNumber())) {
+                    allCard.add(patientPolicy);
+
+                }
+            }
+        }
+        return allCard;
+    }*/
+    public static List<InsurancePolicy> getPatientInsurancePolicies(Patient patient, Date onDate){
+
+        List<InsurancePolicy> selectPatientInsuranceNumber = new ArrayList<InsurancePolicy>();
+
+        List<Beneficiary> beneficiaries = InsurancePolicyUtil.getBeneficiaryByPatient(patient);
+        for(Beneficiary ben : beneficiaries){
+            for (InsurancePolicy patientPolicy : InsurancePolicyUtil.getValidInsurancePolicyOnDate(ben, onDate)) {
+                if (ben.getPolicyIdNumber().equals(patientPolicy.getInsuranceCardNo())) {
+                    selectPatientInsuranceNumber.add(patientPolicy);
+
+
+                }
             }
         }
 
-        return selectPatientInsurancePolicies;
+        return selectPatientInsuranceNumber;
     }
     public static List<Insurance> getAllInsurances(boolean isValid,Patient patient, Date onDate){
         List<Insurance> insurances = new ArrayList<Insurance>();
@@ -604,8 +622,10 @@ public class PrimaryCareUtil {
         for(Beneficiary ben : beneficiaries){
             for(InsurancePolicy patientPolicy : InsurancePolicyUtil.getValidInsurancePolicyOnDate(ben,onDate)){
                 for(Insurance insurance : InsuranceUtil.getInsurances(isValid)){
+
                     if(patientPolicy.getInsurance()==insurance){
                         insurances.add(insurance);
+
                     }
                 }
             }

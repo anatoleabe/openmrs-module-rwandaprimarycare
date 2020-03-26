@@ -23,6 +23,8 @@ import org.openmrs.Person;
 import org.openmrs.PersonAttribute;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.mohappointment.utils.AppointmentUtil;
+import org.openmrs.module.mohbilling.businesslogic.InsurancePolicyUtil;
+import org.openmrs.module.mohbilling.model.InsurancePolicy;
 import org.openmrs.util.OpenmrsUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -199,14 +201,15 @@ public class RwandaPrimaryCarePatientDashboardController {
 	        if (gatherInsurance != null && gatherInsurance.equals(0)){
 //				Person person = Context.getPersonService().getPerson(patient.getPatientId());
 				Date currentDate = new Date();
-	            model.addAttribute("mostRecentType", PrimaryCareBusinessLogic.getLastInsuranceType(patient));
-	            model.addAttribute("mostRecentInsuranceNumber", PrimaryCareBusinessLogic.getLastInsuranceNumber(patient));
+//	            model.addAttribute("mostRecentType", PrimaryCareBusinessLogic.getLastInsuranceType(patient));
+				model.addAttribute("mostRecentInsuranceNumber", PrimaryCareUtil.getPatientInsurancePolicies(patient,currentDate));
+//	            model.addAttribute("mostRecentInsuranceNumber", PrimaryCareBusinessLogic.getLastInsuranceNumber(patient));
 //	            model.addAttribute("insuranceTypes", PrimaryCareBusinessLogic.getInsuranceTypeAnswers());
-//				model.addAttribute("insuranceTypes", PrimaryCareUtil.getAllInsurances(true,patient,currentDate));
-				model.addAttribute("PatientInsurancePolicy", PrimaryCareUtil.getPatientInsurancePolicies(patient,new Date()));
+				model.addAttribute("insuranceTypes", PrimaryCareUtil.getAllInsurances(true,patient,currentDate));
+				//model.addAttribute("PatientInsurancePolicy", PrimaryCareUtil.getPatientInsurancePolicies(patient,new Date()));
 
 	            return "/module/rwandaprimarycare/insuranceInformation";
-	        }    
+	        }
 
 	        if (insuranceType != null && registrationEncounterToday != null){
 	            	//for edit, just void
