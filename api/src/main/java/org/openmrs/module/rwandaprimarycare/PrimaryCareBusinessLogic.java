@@ -36,6 +36,11 @@ import org.openmrs.VisitType;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.idgen.IdentifierSource;
 import org.openmrs.module.idgen.service.IdentifierSourceService;
+import org.openmrs.module.mohbilling.businesslogic.InsurancePolicyUtil;
+import org.openmrs.module.mohbilling.businesslogic.InsuranceUtil;
+import org.openmrs.module.mohbilling.model.Beneficiary;
+import org.openmrs.module.mohbilling.model.Insurance;
+import org.openmrs.module.mohbilling.model.InsurancePolicy;
 import org.openmrs.module.namephonetics.NamePhoneticsService;
 
 
@@ -374,11 +379,41 @@ public class PrimaryCareBusinessLogic {
         }
         return concept;
     }
+//Adding Clinical impression and treatment plan other
 
-
-
-
-
+    public static Concept getTreatmentPlanOtherConcept() {
+        Concept concept = null;
+        String gp = Context.getAdministrationService().getGlobalProperty("registration.concept.TREATMENTPLANOTHER");
+        if (gp == null)
+            throw new RuntimeException("You must set the global property registration.concept.registration.concept.TREATMENTPLANOTHER.");
+        concept = Context.getConceptService().getConceptByUuid(gp);
+        if (concept == null){
+            try {
+                concept = Context.getConceptService().getConcept(Integer.valueOf(gp));
+            } catch (Exception ex) { }
+            if (concept == null) {
+                throw new RuntimeException("Cannot find concept specified by global property registration.concept.registration.concept.TREATMENTPLANOTHER");
+            }
+        }
+        return concept;
+    }
+    //Adding Clinical impression and treatment plan other
+    public static Concept getClinicalImpressionCommentsConcept() {
+        Concept concept = null;
+        String gp = Context.getAdministrationService().getGlobalProperty("registration.concept.CLINICALIMPRESSIONCOMMENTS");
+        if (gp == null)
+            throw new RuntimeException("You must set the global property registration.concept.registration.concept.CLINICALIMPRESSIONCOMMENTS.");
+        concept = Context.getConceptService().getConceptByUuid(gp);
+        if (concept == null){
+            try {
+                concept = Context.getConceptService().getConcept(Integer.valueOf(gp));
+            } catch (Exception ex) { }
+            if (concept == null) {
+                throw new RuntimeException("Cannot find concept specified by global property registration.concept.registration.concept.CLINICALIMPRESSIONCOMMENTS");
+            }
+        }
+        return concept;
+    }
 
 
     
@@ -871,6 +906,6 @@ public class PrimaryCareBusinessLogic {
 		return Context.getEncounterService().saveEncounter(e);
 
 	}
-    
+
 
 }

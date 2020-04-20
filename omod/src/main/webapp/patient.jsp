@@ -57,10 +57,10 @@
 									<c:if test="${fn:length(encounter.obs) == 0}">
 										<spring:message code="rwandaprimarycare.touchscreen.noObservations"/>
 									</c:if>
-									<c:forEach var="obs" items="${encounter.obs}" end="3">
+									<c:forEach var="obs" items="${encounter.obs}" end="6">
 										<openmrs:format concept="${obs.concept}"/>: <openmrs:format obsValue="${obs}"/> <br/>
 									</c:forEach>
-									<c:if test="${fn:length(encounter.obs) > 4}">
+									<c:if test="${fn:length(encounter.obs) > 6}">
 										...
 									</c:if>
 						

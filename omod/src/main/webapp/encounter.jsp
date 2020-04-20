@@ -33,7 +33,7 @@
 </c:if>
 <c:if test="${fn:length(encounter.obs) != 0}">
 	<table>
-		<c:forEach var="obs" items="${encounter.obs}" end="3">
+		<c:forEach var="obs" items="${encounter.obs}" end="6">
 			<tr>
 				<td align="right"><small><openmrs:format concept="${obs.concept}"/>:</small></td>
 				<td><openmrs:format obsValue="${obs}"/></td>

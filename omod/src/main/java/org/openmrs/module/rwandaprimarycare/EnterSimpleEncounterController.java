@@ -77,7 +77,11 @@ public class EnterSimpleEncounterController {
 			questions.add(new Question(msa.getMessage("rwandaprimarycare.RESPIRATORYRATE"), PrimaryCareBusinessLogic.getRespirationRateConcept(), false));
 			questions.add(new Question(msa.getMessage("rwandaprimarycare.BloodOxygenSaturation"), PrimaryCareBusinessLogic.getBloodOxygenSaturationConcept(), false));
 
-	        model.addAttribute("questions", questions);
+			//Adding Clinical impression and treatment plan other
+			questions.add(new Question(msa.getMessage("rwandaprimarycare.CLINICALIMPRESSIONCOMMENTS"), PrimaryCareBusinessLogic.getClinicalImpressionCommentsConcept(), false));
+			questions.add(new Question(msa.getMessage("rwandaprimarycare.TREATMENTPLANOTHER"), PrimaryCareBusinessLogic.getTreatmentPlanOtherConcept(), false));
+
+			model.addAttribute("questions", questions);
 	        
 	        if(visitDate != null)
 	        {

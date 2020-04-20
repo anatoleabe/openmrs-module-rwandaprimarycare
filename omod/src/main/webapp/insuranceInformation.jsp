@@ -3,24 +3,34 @@
 
 
 <form method="get">
-<table> 
+<table>
 	<tr><td></td>
 		<td>
 			
 			<select optional="false" name="insuranceType" label="<spring:message code='rwandaprimarycare.touchscreen.insuranceType'/>" helpText="<spring:message code='rwandaprimarycare.touchscreen.insuranceType'/>">
-					<c:forEach var="answer" items="${insuranceTypes}">
-						<option value="${answer.conceptId}"
-							<c:if test="${!empty answer && !empty mostRecentType && answer == mostRecentType}"> SELECTED </c:if>
-						>${answer.name}</option>
+					<c:forEach var="insurance" items="${insuranceTypes}">
+                        <option value="${insurance.getConcept()}"
+                        >${insurance.getConcept().getName()}</option>
 					</c:forEach>
 			</select>
+
 		</td>
 	</tr>
 	<tr>
 		<td></td>
-		<td>
+		<!-- <td>
 			<c:set var="insStr"><spring:message code='rwandaprimarycare.touchscreen.insuranceNumber'/></c:set>
-			<touchscreen:textInput   required="false" label="${insStr}"  field_name="insuranceNumber" value="${mostRecentInsuranceNumber}" />
+			<touchscreen:textInput   required="false" label="${insStr}"  field_name="insuranceNumber"  value="${mostRecentInsuranceNumber}" />
+
+
+
+		</td> -->
+		<td>
+		<select option="false" name="insuranceNumber" label="<spring:message code='rwandaprimarycare.touchscreen.insuranceNumber'/>" helpText="<spring:message code='rwandaprimarycare.touchscreen.insuranceNumber'/>">
+		<c:forEach var="patientPolicy" items="${mostRecentInsuranceNumber}">
+		<option value="${patientPolicy.getInsuranceCardNo()}">${patientPolicy.getInsuranceCardNo()}</option>
+		</c:forEach>
+		</select>
 		</td>
 	</tr>
 	<tr>

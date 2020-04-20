@@ -26,6 +26,11 @@ import org.openmrs.api.context.Context;
 import org.openmrs.module.idgen.IdentifierSource;
 import org.openmrs.module.idgen.SequentialIdentifierGenerator;
 import org.openmrs.module.idgen.service.IdentifierSourceService;
+import org.openmrs.module.mohbilling.businesslogic.InsurancePolicyUtil;
+import org.openmrs.module.mohbilling.businesslogic.InsuranceUtil;
+import org.openmrs.module.mohbilling.model.Beneficiary;
+import org.openmrs.module.mohbilling.model.Insurance;
+import org.openmrs.module.mohbilling.model.InsurancePolicy;
 import org.openmrs.patient.IdentifierValidator;
 import org.openmrs.module.mohappointment.model.Appointment;
 import org.openmrs.module.mohappointment.utils.AppointmentUtil;
@@ -131,8 +136,52 @@ public class PrimaryCareUtil {
                 } catch (Exception ex){log.info("Unable to load concept for mother's name.  Returning null");}
             }
             return ret;
-    }  
-    
+    }
+
+    public static Concept getEducationLevelConcept(){
+        Concept ret = null;
+        String st = Context.getAdministrationService().getGlobalProperty(PrimaryCareConstants.GLOBAL_PROPERTY_EDUCATION_LEVEL_CONCEPT);
+        if (st != null && !st.equals("")){
+            try {
+                ret = Context.getConceptService().getConcept(Integer.valueOf(st));
+            } catch (Exception ex){log.info("Unable to load concept for education level.  Returning null");}
+        }
+        return ret;
+    }
+
+    public static Concept getProfessionConcept(){
+        Concept ret = null;
+        String st = Context.getAdministrationService().getGlobalProperty(PrimaryCareConstants.GLOBAL_PROPERTY_PROFESSION_CONCEPT);
+        if (st != null && !st.equals("")){
+            try {
+                ret = Context.getConceptService().getConcept(Integer.valueOf(st));
+            } catch (Exception ex){log.info("Unable to load concept for profession.  Returning null");}
+        }
+        return ret;
+    }
+
+    public static Concept getReligionConcept(){
+        Concept ret = null;
+        String st = Context.getAdministrationService().getGlobalProperty(PrimaryCareConstants.GLOBAL_PROPERTY_RELIGION_CONCEPT);
+        if (st != null && !st.equals("")){
+            try {
+                ret = Context.getConceptService().getConcept(Integer.valueOf(st));
+            } catch (Exception ex){log.info("Unable to load concept for religion.  Returning null");}
+        }
+        return ret;
+    }
+
+    public static Concept getPhoneNumberConcept(){
+        Concept ret = null;
+        String st = Context.getAdministrationService().getGlobalProperty(PrimaryCareConstants.GLOBAL_PROPERTY_PHONE_NUMBER_CONCEPT);
+        if (st != null && !st.equals("")){
+            try {
+                ret = Context.getConceptService().getConcept(Integer.valueOf(st));
+            } catch (Exception ex){log.info("Unable to load concept for Phone Number.  Returning null");}
+        }
+        return ret;
+    }
+
     public static Concept getInsuranceTypeConcept(){
         Concept ret = null;
         String st = Context.getAdministrationService().getGlobalProperty(PrimaryCareConstants.GLOBAL_PROPERTY_INSURANCE_TYPE);
@@ -521,16 +570,22 @@ public class PrimaryCareUtil {
         		  attributeType.setDescription("First or last name of this person's father");
                   ps.savePersonAttributeType(attributeType);
                   log.info("Created New Person Attribute: "+PrimaryCareConstants.FATHER_NAME_ATTRIBUTE_TYPE);
-              } else {
+              }
+
+        	  else {
                   log.info("Person Attribute: "+ PrimaryCareConstants.FATHER_NAME_ATTRIBUTE_TYPE +"already exists");
               }
         	   PersonAttribute attribute = new PersonAttribute(attributeType, "");
                attribute.setValue(fathersName);
                patient.addAttribute(attribute);
         }
-        return patient;
+
+            return patient;
     }
-    
+
+
+
+
     public static boolean hasParentsNamesAttributes(Patient patient){
     	PersonAttribute mumNameAttribute = patient.getAttribute(Context.getPersonService().getPersonAttributeTypeByName(PrimaryCareConstants.MOTHER_NAME_ATTRIBUTE_TYPE));
     	PersonAttribute dadNameAttribute = patient.getAttribute(Context.getPersonService().getPersonAttributeTypeByName(PrimaryCareConstants.FATHER_NAME_ATTRIBUTE_TYPE));
@@ -539,10 +594,17 @@ public class PrimaryCareUtil {
     	else
     		return false;
     }
+
+
+
+
+
+
+
     /**
      * Creates waiting appointment in different services
      *
-     * @param patient
+     * @param  patient
      */
     public static void createWaitingAppointment(Person provider, Encounter encounter, Obs obs, HttpSession session, Concept serviceConcept) {
         Appointment waitingAppointment = new Appointment();
@@ -580,5 +642,53 @@ public class PrimaryCareUtil {
         }
 
         return selectedConcepts;
+   }
+    /*public static List<InsurancePolicy> getInsurancePolicyByCardNo(Patient patient,Date onDate){
+        List<InsurancePolicy> allCard = new ArrayList<InsurancePolicy>();
+        List<Beneficiary> beneficiaries = InsurancePolicyUtil.getBeneficiaryByPatient(patient);
+        for(Beneficiary ben : beneficiaries){
+            for(InsurancePolicy patientPolicy : InsurancePolicyUtil.getValidInsurancePolicyOnDate(ben,onDate)){
+                if (patientPolicy.getInsuranceCardNo().equals(ben.getPolicyIdNumber())) {
+                    allCard.add(patientPolicy);
+
+                }
+            }
+        }
+        return allCard;
+    }*/
+    public static List<InsurancePolicy> getPatientInsurancePolicies(Patient patient, Date onDate){
+
+        List<InsurancePolicy> selectPatientInsuranceNumber = new ArrayList<InsurancePolicy>();
+
+        List<Beneficiary> beneficiaries = InsurancePolicyUtil.getBeneficiaryByPatient(patient);
+        for(Beneficiary ben : beneficiaries){
+            for (InsurancePolicy patientPolicy : InsurancePolicyUtil.getValidInsurancePolicyOnDate(ben, onDate)) {
+                if (ben.getPolicyIdNumber().equals(patientPolicy.getInsuranceCardNo())) {
+                    selectPatientInsuranceNumber.add(patientPolicy);
+
+
+                }
+            }
+        }
+
+        return selectPatientInsuranceNumber;
+    }
+    public static List<Insurance> getAllInsurances(boolean isValid,Patient patient, Date onDate){
+        List<Insurance> insurances = new ArrayList<Insurance>();
+        List<Beneficiary> beneficiaries = InsurancePolicyUtil.getBeneficiaryByPatient(patient);
+        for(Beneficiary ben : beneficiaries){
+            for(InsurancePolicy patientPolicy : InsurancePolicyUtil.getValidInsurancePolicyOnDate(ben,onDate)){
+                for(Insurance insurance : InsuranceUtil.getInsurances(isValid)){
+
+                    if(patientPolicy.getInsurance()==insurance){
+                        insurances.add(insurance);
+
+                    }
+                }
+            }
+        }
+
+
+        return insurances;
     }
 }

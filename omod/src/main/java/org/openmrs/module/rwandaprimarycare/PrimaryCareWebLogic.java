@@ -40,6 +40,7 @@ public class PrimaryCareWebLogic {
         session.removeAttribute("BIRTHDATE_YEAR");
         session.removeAttribute("MRWNAME");
         session.removeAttribute("FATHERSRWNAME");
+
         session.removeAttribute("COUNTRY");
         session.removeAttribute("PROVINCE");
         session.removeAttribute("DISTRICT");
@@ -53,6 +54,7 @@ public class PrimaryCareWebLogic {
     	  if(parents.size() == 0 && PrimaryCareUtil.hasParentsNamesAttributes(patient)){
         	map.addAttribute("mumStr", patient.getAttribute(Context.getPersonService().getPersonAttributeTypeByName(PrimaryCareConstants.MOTHER_NAME_ATTRIBUTE_TYPE)).getValue());
             map.addAttribute("dadStr", patient.getAttribute(Context.getPersonService().getPersonAttributeTypeByName(PrimaryCareConstants.FATHER_NAME_ATTRIBUTE_TYPE)).getValue());
+
         }else{
         	map.addAttribute("mumStr","");
             map.addAttribute("dadStr","");
