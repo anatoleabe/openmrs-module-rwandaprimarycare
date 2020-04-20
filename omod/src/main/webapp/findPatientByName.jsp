@@ -49,7 +49,9 @@
                     <td>Current Umudugudu</td>
             <c:set var="umuduguduStr"><spring:message code='rwandaprimarycare.touchscreen.umudugudu' /></c:set>
             <td><touchscreen:textInput required="false" label="${umuduguduStr}" field_name="UMUDUGUDU" value="${search}" allowFreeText="true" ajaxURL="findPatientByNameAjax.form?searchType=UMUDUGUDU&search=" javascriptAction="updateAddressHierarchyCache()"/></td>
-    </tr>	-->		
+    </tr>	-->
+
+
             <tr>
                 <td>Submit</td>
                 <c:set var="searchStr"><spring:message code='rwandaprimarycare.touchscreen.search' /></c:set>
@@ -73,6 +75,12 @@
         <c:param name="age" value="${param.AGE}"/>
         <c:param name="mothersName" value="${param.MRWNAME}"/>
         <c:param name="fathersName" value="${param.FATHERSRWNAME}"/>
+
+        <c:param name="educationLevel" value="${param.EDLEV}"/>
+        <c:param name="profession" value="${param.PROF}"/>
+        <c:param name="religion" value="${param.RELIG}"/>
+        <c:param name="phoneNumber" value="${param.PHNUM}"/>
+
         <c:param name="country" value="${param.COUNTRY}"/>
         <c:param name="province" value="${param.PROVINCE}"/>
         <c:param name="district" value="${param.DISTRICT}"/>

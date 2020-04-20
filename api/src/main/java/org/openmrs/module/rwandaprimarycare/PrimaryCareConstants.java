@@ -23,7 +23,7 @@ public class PrimaryCareConstants {
     // NOTE ABOUT THE LOCATION GLOBAL PROPERTIES:  WHEN A CLERK LOGS IN AT A GIVEN LOCATION, THAT LOCATION WILL INFORM THE IDENTIFIER VALIDATOR
     // WHAT PREFIX TO APPEND.  THEREFORE, ACROSS SYNC NETWORKS, TO ENSURE THAT IDS ARE NEVER DUPLICATED, THE VALUES
     // THAT YOU ENTER FOR LOCATION CODES IN *BOTH* GLOBAL PROPERTIES MUST BE UNIQUE TO THAT SERVER.
-    
+
     // FOR EXAMPLE, RWINK SHOULD HAVE THE DEFAULT SET TO 417 -- THE CODE FOR RWINK HEALTH CENTER,
     // AND THE LOCATION CODES SHOULD CONTAIN RWINK HEALTH CENTER *AND THE RWINK HOSPITAL FOSA CODES
     
@@ -38,6 +38,8 @@ public class PrimaryCareConstants {
     
     public static final String GLOBAL_PROPERTY_INSURANCE_TYPE = "registration.insuranceTypeConcept";
     public static final String GLOBAL_PROPERTY_INSURANCE_NUMBER = "registration.insuranceNumberConcept";
+
+
     public static final String GLOBAL_PROPERTY_NATIONAL_ID_TYPE = "registration.nationalIdType";
     public static final String SESSION_ATTRIBUTE_WORKSTATION_LOCATION = "primaryCareWorkstationLocation";
     public static final String SESSION_ATTRIBUTE_DIAGNOSIS_LOCATION_CODE = "diagnosisWorkstationLocation";
@@ -50,6 +52,12 @@ public class PrimaryCareConstants {
     public final static String GLOBAL_PROPERTY_RESTRICT_BY_HEALTH_CENTER = "registration.restrictSearchByHealthCenter";
     public static final String MOTHER_NAME_ATTRIBUTE_TYPE = "Mother's name";
     public static final String FATHER_NAME_ATTRIBUTE_TYPE = "Father's name";
+
+    public static final String GLOBAL_PROPERTY_EDUCATION_LEVEL_CONCEPT = "Education Level";
+    public static final String GLOBAL_PROPERTY_PROFESSION_CONCEPT = "Profession";
+    public static final String GLOBAL_PROPERTY_RELIGION_CONCEPT = "Religion";
+    public static final String GLOBAL_PROPERTY_PHONE_NUMBER_CONCEPT = "Phone Number";
+
     public static final String GLOBAL_PROPERTY_SERVICE_REQUESTED_CONCEPT_ANSWERS = "registration.serviceRequestedConceptAnswers";
    
     

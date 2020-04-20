@@ -59,6 +59,10 @@ public class CreateNewPatientController {
             @RequestParam("address1") String address1,
             @RequestParam("mothersName") String mothersName,
             @RequestParam("fathersName") String fathersName,
+            @RequestParam("educationLevel") String educationLevel,
+            @RequestParam("profession") String profession,
+            @RequestParam("religion") String religion,
+            @RequestParam("phoneNumber") String phoneNumber,
             HttpSession session, ModelMap map) throws PrimaryCareException {
 
         //LK: Need to ensure that all primary care methods only throw a PrimaryCareException
@@ -102,6 +106,10 @@ public class CreateNewPatientController {
             @RequestParam("idSourceIdCreate") Integer sourceId,
             @RequestParam("mothersNameCreate") String mothersName,
             @RequestParam("fathersNameCreate") String fathersName,
+            @RequestParam("educationLevelCreate") String educationLevel,
+            @RequestParam("professionCreate") String profession,
+            @RequestParam("religionCreate") String religion,
+            @RequestParam("phoneNumberCreate") String phoneNumber,
             HttpSession session) throws PrimaryCareException {
 
         return createPatient(
@@ -123,6 +131,11 @@ public class CreateNewPatientController {
                 sourceId,
                 mothersName,
                 fathersName,
+                educationLevel,
+                profession,
+                religion,
+                phoneNumber,
+
                 session
         );
     }
@@ -156,6 +169,10 @@ public class CreateNewPatientController {
         Integer sourceId = patientObject.get("villageId").getAsInt(); //TODO is this a villageId ?
         String mothersName = patientObject.get("motherNames").getAsString();
         String fathersName = patientObject.get("fatherNames").getAsString();
+        String educationLevel = patientObject.get("educationLevel").getAsString();
+        String profession = patientObject.get("profession").getAsString();
+        String religion = patientObject.get("religion").getAsString();
+        String phoneNumber = patientObject.get("phoneNumber").getAsString();
 
         isCommingFromNIDA = isNidaData;
 
@@ -178,6 +195,12 @@ public class CreateNewPatientController {
                 sourceId,
                 mothersName,
                 fathersName,
+                educationLevel,
+                profession,
+                religion,
+                phoneNumber,
+
+
                 session
         );
     }
@@ -222,6 +245,12 @@ public class CreateNewPatientController {
             Integer sourceId,
             String mothersName,
             String fathersName,
+            String educationLevel,
+            String profession,
+            String religion,
+            String phoneNumber,
+
+
             HttpSession session
     ) throws PrimaryCareException {
         //LK: Need to ensure that all primary care methods only throw a PrimaryCareException
@@ -284,6 +313,35 @@ public class CreateNewPatientController {
                 pa.setPreferred(true);
                 newPatient.addAddress(pa);
             }
+
+            //save Education Level person attribute type
+            PersonAttributeType educationLevelAttributeType=Context.getPersonService().getPersonAttributeTypeByName(PrimaryCareConstants.GLOBAL_PROPERTY_EDUCATION_LEVEL_CONCEPT);
+            PersonAttribute educationLevelAttribute=new PersonAttribute();
+            educationLevelAttribute.setAttributeType(educationLevelAttributeType);
+            educationLevelAttribute.setValue(educationLevel);
+            newPatient.addAttribute(educationLevelAttribute);
+
+            //save Profession person attribute type
+            PersonAttributeType professionAttributeType=Context.getPersonService().getPersonAttributeTypeByName(PrimaryCareConstants.GLOBAL_PROPERTY_PROFESSION_CONCEPT);
+            PersonAttribute professionAttribute=new PersonAttribute();
+            professionAttribute.setAttributeType(professionAttributeType);
+            professionAttribute.setValue(profession);
+            newPatient.addAttribute(professionAttribute);
+
+            //save Religion person attribute type
+            PersonAttributeType religionAttributeType=Context.getPersonService().getPersonAttributeTypeByName(PrimaryCareConstants.GLOBAL_PROPERTY_RELIGION_CONCEPT);
+            PersonAttribute religionAttribute=new PersonAttribute();
+            religionAttribute.setAttributeType(religionAttributeType);
+            religionAttribute.setValue(religion);
+            newPatient.addAttribute(religionAttribute);
+
+            //save Phone Number person attribute type
+            PersonAttributeType phoneNumberAttributeType=Context.getPersonService().getPersonAttributeTypeByName(PrimaryCareConstants.GLOBAL_PROPERTY_PHONE_NUMBER_CONCEPT);
+            PersonAttribute phoneNumberAttribute=new PersonAttribute();
+            phoneNumberAttribute.setAttributeType(phoneNumberAttributeType);
+            phoneNumberAttribute.setValue(phoneNumber);
+            newPatient.addAttribute(phoneNumberAttribute);
+
 
             //new patients get a new ID:
             try {

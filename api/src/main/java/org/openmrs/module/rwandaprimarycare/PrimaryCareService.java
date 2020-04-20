@@ -13,7 +13,7 @@ public interface PrimaryCareService extends OpenmrsService {
     /**
      * FANAME is mapped to given_name, RWNAME is mapped to family_name
      */
-	public enum PatientSearchType {FANAME,RWNAME,GENDER, AGE, BIRTHDATE_DAY, BIRTHDATE_MONTH, BIRTHDATE_YEAR, MRWNAME, FATHERSRWNAME, COUNTRY, PROVINCE, SECTOR, UMUDUGUDU, CELL, DISTRICT};
+	public enum PatientSearchType {FANAME,RWNAME,GENDER, AGE, BIRTHDATE_DAY, BIRTHDATE_MONTH, BIRTHDATE_YEAR, MRWNAME, FATHERSRWNAME, EDLEV, PROF, RELIG, PHNUM, COUNTRY, PROVINCE, SECTOR, UMUDUGUDU, CELL, DISTRICT};
 	
 	/**
 	 * Returns a list of all possible values for the given search type. This does NOT return patients.
@@ -48,6 +48,10 @@ public interface PrimaryCareService extends OpenmrsService {
     		Float age, 
     		String mothersRwandanName,
     		String fathersRwandanName,
+			String patientEducationLevel,
+			String patientProfession,
+			String patientReligion,
+			String phoneNumber,
     		String country,
     		String province,
     		String district,

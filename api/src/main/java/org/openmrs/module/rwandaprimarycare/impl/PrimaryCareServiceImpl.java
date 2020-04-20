@@ -47,7 +47,9 @@ public class PrimaryCareServiceImpl extends BaseOpenmrsService implements Primar
     		results = dao.getPatientFamilyNamesList(search);  //FATHERSRWNAME = Father's family_name
     		PersonAttributeType fatherNameAttributeType = Context.getPersonService().getPersonAttributeTypeByName(PrimaryCareConstants.FATHER_NAME_ATTRIBUTE_TYPE);
     		results.addAll(dao.getParentsFamilyNamesList(search,fatherNameAttributeType.getPersonAttributeTypeId()));
-    	} else if (searchType == PatientSearchType.COUNTRY){
+
+
+		} else if (searchType == PatientSearchType.COUNTRY){
     	    List<AddressHierarchy> aList = ahs.getTopOfHierarchyList();
     	    if (aList != null && aList.size() > 0)
     	        results = new ArrayList<String>();
@@ -79,9 +81,15 @@ public class PrimaryCareServiceImpl extends BaseOpenmrsService implements Primar
     		String frenchEnglishName, 
     		String rwandanName,
     		String gender,
-    		Float age, 
+    		Float age,
     		String mothersRwandanName,
     		String fathersRwandanName,
+
+			String patientEducationLevel,
+			String patientProfession,
+			String patientReligion,
+			String phoneNumber,
+
     		String country,
             String province,
             String district,

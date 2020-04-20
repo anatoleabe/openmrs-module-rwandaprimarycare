@@ -129,6 +129,7 @@
 			The number of barcodes to print at a time, when printing barcodes.
 		</description>
 	</globalProperty>
+
 	<globalProperty>
 		<property>registration.insuranceTypeConcept</property>
 		<defaultValue>6740</defaultValue>
@@ -136,6 +137,7 @@
 			The conceptID for insurance type
 		</description>
 	</globalProperty>
+
 	<globalProperty>
 		<property>registration.insuranceTypeConceptAnswers</property>
 		<defaultValue>1107,6738,6739,6955,6956,6957</defaultValue>
@@ -143,6 +145,7 @@
 			A list of the concept answers in the order that you'd like to see them for insuranceTypeConcept.  comma delimited
 		</description>
 	</globalProperty>
+
 	<globalProperty>
 		<property>registration.insuranceNumberConcept</property>
 		<defaultValue>6741</defaultValue>
@@ -150,6 +153,7 @@
 			The conceptID for insurance number
 		</description>
 	</globalProperty>
+
 	<globalProperty>
 		<property>registration.showDiagnosisLink</property>
 		<defaultValue>false</defaultValue>
@@ -212,15 +216,28 @@
 		</description>
 	</globalProperty>
 
+	<globalProperty>
+		<property>registration.concept.CLINICALIMPRESSIONCOMMENTS</property>
+		<defaultValue>3cd9d956-26fe-102b-80cb-0017a47871b2</defaultValue>
+		<description>
+			Concept id or UUID for CLINICAL IMPRESSION COMMENTS.
+		</description>
+	</globalProperty>
 
+	<globalProperty>
+		<property>registration.concept.TREATMENTPLANOTHER</property>
+		<defaultValue>3cda0160-26fe-102b-80cb-0017a47871b2</defaultValue>
+		<description>
+			Concept id or UUID for TREATMENT PLAN OTHER.
+		</description>
+	</globalProperty>
 
-
-	
 	<globalProperty>
 	    <property>registration.backEntryLimit</property>
 	    <defaultValue>14</defaultValue>
 		<description>The number of days allowable to back enter registration data</description>	
 	</globalProperty>
+
 	
 	<dwr>
 		<allow>

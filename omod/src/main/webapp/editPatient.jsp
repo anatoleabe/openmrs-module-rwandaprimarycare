@@ -65,6 +65,7 @@
 		<c:set var="UmuduguduStr"><spring:message code='rwandaprimarycare.touchscreen.umudugudu' /></c:set>
 		<c:set var="MomStr"><spring:message code='rwandaprimarycare.touchscreen.mom' /></c:set>
 		<c:set var="DadStr"><spring:message code='rwandaprimarycare.touchscreen.dad' /></c:set>
+
 		
 		<tr>
 			<td>Current Country</td>
@@ -111,6 +112,29 @@
 			<td>Fathers Name</td>
 			<td><touchscreen:textInput required="false" label="${DadStr}" field_name="fathersName" value="${dadStr}" allowFreeText="true" ajaxURL="findPatientByNameAjax.form?searchType=FATHERSRWNAME&search="/></td>
 		</tr>
+        <tr>
+        	<td><spring:message code='rwandaprimarycare.touchscreen.educationLevel'/></td>
+        				<c:set var="educationLevel"><spring:message code='rwandaprimarycare.touchscreen.educationLevel' /></c:set>
+        	<td><touchscreen:textInput required="true"  label="${educationLevel}" field_name="educationLevel" value="${patient.educationLevel}" allowFreeText="true" ajaxURL="findPatientByNameAjax.form?searchType=EDLEV&search=" fieldType="upper"/></td>
+        </tr>
+        <tr>
+           	<td><spring:message code='rwandaprimarycare.touchscreen.professionInfo'/></td>
+           				<c:set var="profession"><spring:message code='rwandaprimarycare.touchscreen.professionInfo' /></c:set>
+           	<td><touchscreen:textInput required="true"  label="${profession}" field_name="profession" value="${patient.profession}" allowFreeText="true" ajaxURL="findPatientByNameAjax.form?searchType=PROF&search=" fieldType="upper"/></td>
+        </tr>
+        <tr>
+           <td><spring:message code='rwandaprimarycare.touchscreen.religion'/></td>
+            			<c:set var="religion"><spring:message code='rwandaprimarycare.touchscreen.religion' /></c:set>
+           <td><touchscreen:textInput required="true"  label="${religion}" field_name="profession" value="${patient.religion}" allowFreeText="true" ajaxURL="findPatientByNameAjax.form?searchType=RELIG&search=" fieldType="upper"/></td>
+        </tr>
+        <tr>
+           <td>Phone Number</td>
+                        <c:set var="phoneNumber"><spring:message code='rwandaprimarycare.touchscreen.phoneNumber' /></c:set>
+           <td><touchscreen:textInput required="true"  label="${phoneNumber}" field_name="phoneNumberCreate" value="${param.phoneNumber}" allowFreeText="true" ajaxURL="findPatientByNameAjax.form?searchType=PHNUM&search=" fieldType="upper"/></td>
+        </tr>
+
+
+
 	</table>
 	<input type="submit" value="Submit"/>
 </form>
