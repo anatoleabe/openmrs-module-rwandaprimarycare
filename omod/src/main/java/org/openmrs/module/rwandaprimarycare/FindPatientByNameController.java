@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
-@SessionAttributes(value={"search", "addIdentifier", "FANAME", "RWNAME", "GENDER", "AGE", "BIRTHDATE_DAY", "BIRTHDATE_MONTH", "BIRTHDATE_YEAR","MRWNAME", "FATHERSRWNAME","COUNTRY","PROVINCE","DISTRICT", "SECTOR", "CELL", "UMUDUGUDU"},
-        types={String.class, String.class, String.class, String.class, String.class, Float.class, Integer.class, Integer.class,Integer.class,String.class, String.class,String.class, String.class, String.class, String.class, String.class, String.class})
+@SessionAttributes(value={"search", "addIdentifier", "FANAME", "RWNAME", "GENDER", "AGE", "BIRTHDATE_DAY", "BIRTHDATE_MONTH", "BIRTHDATE_YEAR","MRWNAME","FATHERSRWNAME","COUNTRY","PROVINCE","DISTRICT", "SECTOR", "CELL", "UMUDUGUDU"},
+        types={String.class, String.class, String.class, String.class, String.class, Float.class, Integer.class, Integer.class,Integer.class,String.class,String.class,String.class,String.class, String.class, String.class, String.class, String.class, String.class})
 public class FindPatientByNameController {
 
     protected final Log log = LogFactory.getLog(getClass());    
@@ -52,6 +52,9 @@ public class FindPatientByNameController {
 	        Integer searchBIRTHDATE_YEAR = ServletRequestUtils.getIntParameter(request, PatientSearchType.BIRTHDATE_YEAR.toString(), 0);
 	        String searchMRWNAME = ServletRequestUtils.getStringParameter(request, PatientSearchType.MRWNAME.toString(), null);
 	        String searchFATHERSRWNAME = ServletRequestUtils.getStringParameter(request, PatientSearchType.FATHERSRWNAME.toString(), null);
+
+
+
 	        String searchCOUNTRY = ServletRequestUtils.getStringParameter(request, PatientSearchType.COUNTRY.toString(), null);;
 	        String searchPROVINCE = ServletRequestUtils.getStringParameter(request, PatientSearchType.PROVINCE.toString(), null);;
 	        String searchDISTRICT = ServletRequestUtils.getStringParameter(request, PatientSearchType.DISTRICT.toString(), null);
@@ -86,6 +89,8 @@ public class FindPatientByNameController {
 	    	    model.addAttribute("searchAGE", searchAGE);
 	    	    model.addAttribute("searchMRWNAME", searchMRWNAME);
 	    	    model.addAttribute("searchFATHERSRWNAME", searchFATHERSRWNAME);
+
+
 	    	    model.addAttribute("searchUMUDUGUDU", searchUMUDUGUDU);
 	    	    model.addAttribute("searchCELL", searchCELL);
 	    	    model.addAttribute("searchDISTRICT", searchDISTRICT);
