@@ -8,8 +8,7 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-2.5.xsd
            http://www.springframework.org/schema/util
-           http://www.springframework.org/schema/util/spring-util-2.0.xsd
-		   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+           http://www.springframework.org/schema/util/spring-util-2.0.xsd">
 
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
 	<!-- Service -->
@@ -62,28 +61,6 @@
 				<entry key="org.openmrs.module.rwandaprimarycare.PrimaryCareException" value="module/rwandaprimarycare/primaryCareUncaughtException"/>
 			</map>
 		</property>
-	</bean>
-
-	<bean id="rwandaPrimaryCareUrlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-
-		<property name="order">
-			<value>2</value>
-		</property>
-
-		<property name="mappings">
-			<props>
-				<prop key="module/rwandaprimarycare/insurancePolicySearch.form">mohBillingInsurancePolicySearchFormController</prop>
-				<prop key="module/rwandaprimarycare/insurancePolicy.form">mohBillingInsurancePolicyFormController</prop>
-			</props>
-		</property>
-	</bean>
-
-	<bean id="mohBillingInsurancePolicySearchFormController" class="org.openmrs.module.rwandaprimarycare.MohBillingInsurancePolicySearchFormController">
-		<property name="viewName"><value>/module/rwandaprimarycare/mohBillingInsurancePolicySearchForm</value></property>
-	</bean>
-
-	<bean id="mohBillingInsurancePolicyFormController" class="org.openmrs.module.rwandaprimarycare.MohBillingInsurancePolicyFormController">
-		<property name="viewName"><value>/module/rwandaprimarycare/mohBillingInsurancePolicyForm</value></property>
 	</bean>
 
 

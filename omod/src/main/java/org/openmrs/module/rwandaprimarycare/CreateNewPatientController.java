@@ -3,8 +3,8 @@ package org.openmrs.module.rwandaprimarycare;
 import com.google.gson.JsonObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
+/*import java.time.LocalDate;
+import java.time.Period;*/
 import static org.springframework.util.StringUtils.hasText;
 
 import java.util.Calendar;

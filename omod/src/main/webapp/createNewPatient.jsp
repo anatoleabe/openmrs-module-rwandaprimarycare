@@ -116,7 +116,7 @@
         </tr>
         <tr>
              <td>Education Level</td>
-                    <c:set var="educationLevel"><spring:message code='rwandaprimarycare.touchscreen.educationLevel' /></c:set>
+                    <c:set var="educationLevel"><spring:message code='EducationLevel' /></c:set>
              <td><touchscreen:textInput required="true"  label="${educationLevel}" field_name="educationLevelCreate" value="${param.educationLevel}" allowFreeText="true" ajaxURL="findPatientByNameAjax.form?searchType=EDLEV&search=" fieldType="upper"/></td>
        </tr>
        <tr>

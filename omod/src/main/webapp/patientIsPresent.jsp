@@ -12,7 +12,9 @@
 		<br/>
 		<c:set var="yes"><spring:message code="rwandaprimarycare.touchscreen.yes"/></c:set>
 		<c:set var="no"><spring:message code="rwandaprimarycare.touchscreen.no"/></c:set>
-		<touchscreen:button label="${yes}" href="insurancePolicySearch.form" cssClass="green"/>
+
+		<touchscreen:button label="${yes}" href="patientIsPresent.form?patientId=${patient.patientId}&printBarCode=true&serviceRequested=0" cssClass="green"/>
+
 		<c:choose>
 			<c:when test="${allowBackEntry eq 'true' }">
 				<touchscreen:button label="${no}" href="patientIsNotPresent.form?patientId=${patient.patientId}" cssClass="green"/>
