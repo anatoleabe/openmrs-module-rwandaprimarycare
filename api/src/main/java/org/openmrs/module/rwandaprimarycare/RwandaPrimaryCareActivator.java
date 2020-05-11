@@ -26,21 +26,22 @@ import org.openmrs.api.EncounterService;
 import org.openmrs.api.UserService;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.Activator;
+import org.openmrs.module.BaseModuleActivator;
 import org.openmrs.util.OpenmrsConstants;
 
 /**
  * This class contains the logic that is run every time this module
  * is either started or shutdown
  */
-public class RwandaPrimaryCareActivator implements Activator, Runnable {
+public class RwandaPrimaryCareActivator extends BaseModuleActivator implements Runnable {
 
 	private Log log = LogFactory.getLog(this.getClass());
 
 	/**
-	 * @see org.openmrs.module.Activator#startup()
+	 * @see BaseModuleActivator#started()
 	 */
-	public void startup() {
-        log.info("Starting Rwanda Primary Care Module");
+	public void started() {
+        log.info("Rwanda Primary Care Module started");
         Thread contextChecker = new Thread(this);
 	    contextChecker.start();
 	    contextChecker = null;
@@ -97,10 +98,10 @@ public class RwandaPrimaryCareActivator implements Activator, Runnable {
 	}
 	
 	/**
-	 *  @see org.openmrs.module.Activator#shutdown()
+	 * @see BaseModuleActivator#started()
 	 */
-	public void shutdown() {
-		log.info("Shutting down Rwanda Primary Care Module");
+	public void stopped() {
+		log.info("Rwanda Primary Care Module stopped");
 	}
 	
 	
