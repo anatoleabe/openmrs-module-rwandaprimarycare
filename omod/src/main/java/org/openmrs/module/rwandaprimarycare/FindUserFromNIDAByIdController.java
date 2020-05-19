@@ -10,6 +10,7 @@ import org.apache.commons.codec.binary.Base64;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.api.context.Context;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -35,6 +36,14 @@ public class FindUserFromNIDAByIdController {
         //So that errors will be directed to a touch screen error page
 
         try {
+            log.info("[info]------ Getting properties.");
+            final String openhimPatientUrl = Context.getAdministrationService().getGlobalProperty(PrimaryCareConstants.GLOBAL_PROPERTY_OPENHIM_NIDA_API);
+            if (openhimPatientUrl == null || openhimPatientUrl.isEmpty()) {
+                log.error("[error]------ Openhim patient report URL is not defined on administration settings.");
+                model.addAttribute("nidaResult", "NOAPI");
+                return "/module/rwandaprimarycare/findUserFromNIDAById";
+            }
+            
             if (nidaData != null){//After validation
                 JsonParser parser = new JsonParser();
                 JsonObject jsonnida = (JsonObject) parser.parse(nidaData);
@@ -48,7 +57,7 @@ public class FindUserFromNIDAByIdController {
                 //model.addAttribute("identifierTypes", PrimaryCareBusinessLogic.getPatientIdentifierTypesToUse());
 
                 search = search.trim().replace(" ", "");
-                final String uri = "http://openhim-core:5001/persons/?id=" + search;
+                final String uri = openhimPatientUrl+"/?id=" + search;
                 RestTemplate restTemplate = new RestTemplate();
 
                 String plainCreds = "openmrs:saviors";
