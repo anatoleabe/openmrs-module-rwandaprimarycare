@@ -28,6 +28,10 @@
     <c:param name="sector" value="${param.SECTOR}"/>
     <c:param name="cell" value="${param.CELL}"/>
     <c:param name="address1" value="${param.UMUDUGUDU}"/>
+    <c:param name="phoneNumber" value="1"/><!-- Se to empty cause, not available in NIDA at this date: 26 May 2020.-->
+    <c:param name="educationLevel" value="_"/><!-- Se to empty cause, not available in NIDA at this date: 26 May 2020.-->
+    <c:param name="profession" value="_"/><!-- Se to empty cause, not available in NIDA at this date: 26 May 2020.-->
+    <c:param name="religion" value="_"/><!-- Se to empty cause, not available in NIDA at this date: 26 May 2020.-->
     <c:param name="fromnida" value="yes"/>
 </c:url>
 

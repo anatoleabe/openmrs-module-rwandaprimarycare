@@ -44,23 +44,35 @@ public class FindUserFromNIDAByIdController {
                 return "/module/rwandaprimarycare/findUserFromNIDAById";
             }
             
+            final String openhimClientID = Context.getAdministrationService().getGlobalProperty(PrimaryCareConstants.GLOBAL_PROPERTY_OPENHIM_USER_NAME);
+            if (openhimClientID == null || openhimClientID.isEmpty()) {
+                    log.error("[error]------ Openhim client ID is not defined on administration settings.");
+                    model.addAttribute("nidaResult", "NOAPI");
+                    return "/module/rwandaprimarycare/findUserFromNIDAById";
+            }
+            final String openhimPwd = Context.getAdministrationService().getGlobalProperty(PrimaryCareConstants.GLOBAL_PROPERTY_OPENHIM_USER_PWD);
+            if (openhimPwd == null || openhimPwd.isEmpty()) {
+                    log.error("[error]------ Openhim client Basic Auth Password is not defined on administration settings.");
+                    model.addAttribute("nidaResult", "NOAPI");
+                    return "/module/rwandaprimarycare/findUserFromNIDAById";
+            }
+            
             if (nidaData != null){//After validation
                 JsonParser parser = new JsonParser();
                 JsonObject jsonnida = (JsonObject) parser.parse(nidaData);
-                CreateNewPatientController createNewPatientController = new CreateNewPatientController();
-
+                CreateNewPatientController createNewPatientController;
+                createNewPatientController = new CreateNewPatientController();
+                
                 return createNewPatientController.createPatient(jsonnida, session, true);
             } else if (search != null && !search.equals("")) {
 
                 model.addAttribute("search", search);
-                //model.addAttribute("results", PrimaryCareBusinessLogic.findPatientsByIdentifier(search, PrimaryCareBusinessLogic.getLocationLoggedIn(session)));
-                //model.addAttribute("identifierTypes", PrimaryCareBusinessLogic.getPatientIdentifierTypesToUse());
 
                 search = search.trim().replace(" ", "");
                 final String uri = openhimPatientUrl+"/?id=" + search;
                 RestTemplate restTemplate = new RestTemplate();
 
-                String plainCreds = "openmrs:saviors";
+                String plainCreds = openhimClientID+":"+openhimPwd;
                 byte[] plainCredsBytes = plainCreds.getBytes();
                 byte[] base64CredsBytes = Base64.encodeBase64(plainCredsBytes);
                 String base64Creds = new String(base64CredsBytes);

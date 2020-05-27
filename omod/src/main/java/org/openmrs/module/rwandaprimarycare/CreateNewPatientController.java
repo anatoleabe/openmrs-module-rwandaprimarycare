@@ -169,10 +169,10 @@ public class CreateNewPatientController {
         Integer sourceId = patientObject.get("villageId").getAsInt(); //TODO is this a villageId ?
         String mothersName = patientObject.get("motherNames").getAsString();
         String fathersName = patientObject.get("fatherNames").getAsString();
-        String educationLevel = patientObject.get("educationLevel").getAsString();
-        String profession = patientObject.get("profession").getAsString();
-        String religion = patientObject.get("religion").getAsString();
-        String phoneNumber = patientObject.get("phoneNumber").getAsString();
+        String educationLevel = (patientObject.get("educationLevel"))!= null ? patientObject.get("educationLevel").getAsString(): "";
+        String profession = (patientObject.get("profession"))!= null ? patientObject.get("profession").getAsString():"";
+        String religion = (patientObject.get("religion"))!= null ? patientObject.get("religion").getAsString():"";
+        String phoneNumber = (patientObject.get("phoneNumber"))!= null ? patientObject.get("phoneNumber").getAsString():"";
 
         isCommingFromNIDA = isNidaData;
 
