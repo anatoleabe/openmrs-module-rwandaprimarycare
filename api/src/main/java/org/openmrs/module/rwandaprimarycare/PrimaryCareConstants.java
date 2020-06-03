@@ -59,6 +59,9 @@ public class PrimaryCareConstants {
     public static final String GLOBAL_PROPERTY_PHONE_NUMBER_CONCEPT = "Phone Number";
 
     public static final String GLOBAL_PROPERTY_SERVICE_REQUESTED_CONCEPT_ANSWERS = "registration.serviceRequestedConceptAnswers";
-   
+    
+    public static final String GLOBAL_PROPERTY_OPENHIM_NIDA_API = "primaryCare.openhim.nida.api";
+    public static final String GLOBAL_PROPERTY_OPENHIM_USER_NAME = "posttoopenhim.openhim.client.user";
+    public static final String GLOBAL_PROPERTY_OPENHIM_USER_PWD = "posttoopenhim.openhim.client.pwd";
     
 }

@@ -28,6 +28,10 @@
     <c:param name="sector" value="${param.SECTOR}"/>
     <c:param name="cell" value="${param.CELL}"/>
     <c:param name="address1" value="${param.UMUDUGUDU}"/>
+    <c:param name="phoneNumber" value="1"/><!-- Se to empty cause, not available in NIDA at this date: 26 May 2020.-->
+    <c:param name="educationLevel" value="_"/><!-- Se to empty cause, not available in NIDA at this date: 26 May 2020.-->
+    <c:param name="profession" value="_"/><!-- Se to empty cause, not available in NIDA at this date: 26 May 2020.-->
+    <c:param name="religion" value="_"/><!-- Se to empty cause, not available in NIDA at this date: 26 May 2020.-->
     <c:param name="fromnida" value="yes"/>
 </c:url>
 
@@ -66,6 +70,9 @@
                 </c:if>
                 <c:if test="${nidaResult == 'NOTFOUND'}">
                     <span style="font-size: 15pt;">No correspondence found from NIDA. Check the national id you entered.</span>
+                </c:if>
+                <c:if test="${nidaResult == 'NOAPI'}">
+                    <span style="font-size: 15pt;">Openhim to NIDA API is not defined on administration settings. Please go to administration settings and set the OpenHIM API.</span>
                 </c:if>
                 <c:if test="${nidaResult == 'INUSE'}">
                     <span style="font-size: 15pt;">${errorMsg}</span>
