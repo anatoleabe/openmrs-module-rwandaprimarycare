@@ -67,6 +67,9 @@
                 <c:if test="${nidaResult == 'NOTFOUND'}">
                     <span style="font-size: 15pt;">No correspondence found from NIDA. Check the national id you entered.</span>
                 </c:if>
+                <c:if test="${nidaResult == 'NOAPI'}">
+                    <span style="font-size: 15pt;">Openhim to NIDA API is not defined on administration settings. Please go to administration settings and set the OpenHIM API.</span>
+                </c:if>
                 <c:if test="${nidaResult == 'INUSE'}">
                     <span style="font-size: 15pt;">${errorMsg}</span>
                 </c:if>

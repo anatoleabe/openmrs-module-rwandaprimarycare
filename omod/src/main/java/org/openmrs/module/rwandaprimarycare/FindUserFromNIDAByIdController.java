@@ -10,6 +10,7 @@ import org.apache.commons.codec.binary.Base64;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.api.context.Context;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -35,6 +36,27 @@ public class FindUserFromNIDAByIdController {
         //So that errors will be directed to a touch screen error page
 
         try {
+            log.info("[info]------ Getting properties.");
+            final String openhimPatientUrl = Context.getAdministrationService().getGlobalProperty(PrimaryCareConstants.GLOBAL_PROPERTY_OPENHIM_NIDA_API);
+            if (openhimPatientUrl == null || openhimPatientUrl.isEmpty()) {
+                log.error("[error]------ Openhim patient report URL is not defined on administration settings.");
+                model.addAttribute("nidaResult", "NOAPI");
+                return "/module/rwandaprimarycare/findUserFromNIDAById";
+            }
+            
+            final String openhimClientID = Context.getAdministrationService().getGlobalProperty(PrimaryCareConstants.GLOBAL_PROPERTY_OPENHIM_USER_NAME);
+            if (openhimClientID == null || openhimClientID.isEmpty()) {
+                    log.error("[error]------ Openhim client ID is not defined on administration settings.");
+                    model.addAttribute("nidaResult", "NOAPI");
+                    return "/module/rwandaprimarycare/findUserFromNIDAById";
+            }
+            final String openhimPwd = Context.getAdministrationService().getGlobalProperty(PrimaryCareConstants.GLOBAL_PROPERTY_OPENHIM_USER_PWD);
+            if (openhimPwd == null || openhimPwd.isEmpty()) {
+                    log.error("[error]------ Openhim client Basic Auth Password is not defined on administration settings.");
+                    model.addAttribute("nidaResult", "NOAPI");
+                    return "/module/rwandaprimarycare/findUserFromNIDAById";
+            }
+            
             if (nidaData != null){//After validation
                 JsonParser parser = new JsonParser();
                 JsonObject jsonnida = (JsonObject) parser.parse(nidaData);
@@ -48,10 +70,10 @@ public class FindUserFromNIDAByIdController {
                 //model.addAttribute("identifierTypes", PrimaryCareBusinessLogic.getPatientIdentifierTypesToUse());
 
                 search = search.trim().replace(" ", "");
-                final String uri = "http://openhim-core:5001/persons/?id=" + search;
+                final String uri = openhimPatientUrl+"/?id=" + search;
                 RestTemplate restTemplate = new RestTemplate();
 
-                String plainCreds = "openmrs:saviors";
+                String plainCreds = openhimClientID+":"+openhimPwd;
                 byte[] plainCredsBytes = plainCreds.getBytes();
                 byte[] base64CredsBytes = Base64.encodeBase64(plainCredsBytes);
                 String base64Creds = new String(base64CredsBytes);

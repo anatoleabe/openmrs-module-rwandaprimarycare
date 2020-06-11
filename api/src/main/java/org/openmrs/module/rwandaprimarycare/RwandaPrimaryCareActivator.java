@@ -19,9 +19,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.EncounterRole;
 import org.openmrs.EncounterType;
+import org.openmrs.GlobalProperty;
 import org.openmrs.Privilege;
 import org.openmrs.VisitType;
 import org.openmrs.api.APIException;
+import org.openmrs.api.AdministrationService;
 import org.openmrs.api.EncounterService;
 import org.openmrs.api.UserService;
 import org.openmrs.api.context.Context;
@@ -35,12 +37,43 @@ import org.openmrs.util.OpenmrsConstants;
 public class RwandaPrimaryCareActivator implements Activator, Runnable {
 
 	private Log log = LogFactory.getLog(this.getClass());
+        private AdministrationService administrationService;
 
 	/**
 	 * @see org.openmrs.module.Activator#startup()
 	 */
 	public void startup() {
         log.info("Starting Rwanda Primary Care Module");
+        
+        
+        administrationService = Context.getAdministrationService();
+        GlobalProperty gp;
+        
+        String openhimNidaApi = administrationService.getGlobalProperty(PrimaryCareConstants.GLOBAL_PROPERTY_OPENHIM_NIDA_API);
+        if (openhimNidaApi == null || openhimNidaApi.isEmpty()) {
+                log.error("[error]------ Openhim to NIDA API is not defined on administration settings.");
+                gp = new GlobalProperty(PrimaryCareConstants.GLOBAL_PROPERTY_OPENHIM_NIDA_API, "http://openhim-core:5001/persons/");
+                gp.setDescription("OpenHIM to NIDA API (ex: http://openhim-core:5001/persons/)");
+                administrationService.saveGlobalProperty(gp);
+        }
+        
+        String openmrsUser = administrationService.getGlobalProperty(PrimaryCareConstants.GLOBAL_PROPERTY_OPENHIM_USER_NAME);
+        if (openmrsUser == null || openmrsUser.isEmpty()) {
+                log.error("[error]------ Openhim client ID is not defined on administration settings.");
+                gp = new GlobalProperty(PrimaryCareConstants.GLOBAL_PROPERTY_OPENHIM_USER_NAME, "openmrs");
+                gp.setDescription("OpenHIM client ID");
+                administrationService.saveGlobalProperty(gp);
+        }
+
+        String openmrsUserPwd = administrationService.getGlobalProperty(PrimaryCareConstants.GLOBAL_PROPERTY_OPENHIM_USER_PWD);
+        if (openmrsUserPwd == null || openmrsUserPwd.isEmpty()) {
+                log.error("[error]------ Openhim client Basic Auth Password is not defined on administration settings.");
+                gp = new GlobalProperty(PrimaryCareConstants.GLOBAL_PROPERTY_OPENHIM_USER_PWD, "saviors");
+                gp.setDescription("OpenHIM openmrs client Basic Auth Password");
+                administrationService.saveGlobalProperty(gp);
+        }
+        
+        
         Thread contextChecker = new Thread(this);
 	    contextChecker.start();
 	    contextChecker = null;
