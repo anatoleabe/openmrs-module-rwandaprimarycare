@@ -31,6 +31,10 @@ public class FindUserFromNIDAByIdController {
 
     @RequestMapping("/module/rwandaprimarycare/findUserFromNIDAById")
     public String setupForm(@RequestParam(value = "search", required = false) String search, 
+            @RequestParam("givenName") String givenName,
+            @RequestParam("familyName") String familyName,
+            @RequestParam("gender") String gender, //NOTE: uses original search param, not 'Create' param
+            @RequestParam("age") Integer age, //uses original search param
             @RequestParam(required = false, value = "nidaValidatedData") String nidaData, HttpSession session, ModelMap model) throws PrimaryCareException {
         //LK: Need to ensure that all primary care methods only throw a PrimaryCareException
         //So that errors will be directed to a touch screen error page
@@ -102,6 +106,10 @@ public class FindUserFromNIDAByIdController {
             }
         } catch (JsonSyntaxException e) {
             model.addAttribute("nidaResult", "NOTFOUND");
+            model.addAttribute("givenName", givenName);
+            model.addAttribute("familyName", familyName);
+            model.addAttribute("gender", gender); //NOTE: uses original search param, not 'Create' param
+            model.addAttribute("age", age); //uses original search param
             return "/module/rwandaprimarycare/findUserFromNIDAById";
         } catch (ParseException e) {
             throw new PrimaryCareException(e);

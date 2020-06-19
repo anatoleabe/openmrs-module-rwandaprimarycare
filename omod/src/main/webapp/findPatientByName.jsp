@@ -83,6 +83,10 @@
     
     <c:url var="findInNIDAHref" value="findUserFromNIDAById.form">
         <c:param name="addIdentifier" value="${addIdentifier}"/>
+        <c:param name="givenName" value="${param.FANAME}"/>
+        <c:param name="familyName" value="${param.RWNAME}"/>
+        <c:param name="gender" value="${param.GENDER}"/>
+        <c:param name="age" value="${param.AGE}"/>
     </c:url>
     
     <c:set var="nfcm"><spring:message code='rwandaprimarycare.touchscreen.notFoundNewPatientManually' /></c:set>

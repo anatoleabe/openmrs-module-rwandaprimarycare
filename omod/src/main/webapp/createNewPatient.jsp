@@ -34,30 +34,19 @@
                 <input type="password" optional="true" helpText="<spring:message code='rwandaprimarycare.touchscreen.existingPCId' />"  name="addPCIdentifier" value="" field_Type="disabled" />
             </td></tr>
 
-        <!--
-                <tr>
-                    <td><spring:message code='rwandaprimarycare.touchscreen.birthdate' /></td>
-                    <Td>
-        <c:set var="bDay"><spring:message code='rwandaprimarycare.touchscreen.birthdateDay' /></c:set>
-        <c:set var="bMonth"><spring:message code='rwandaprimarycare.touchscreen.birthdateMonth' /></c:set>
-        <c:set var="bYear"><spring:message code='rwandaprimarycare.touchscreen.birthdateYear' /></c:set>
-        <c:set var="orLeaveBlank"><spring:message code='rwandaprimarycare.touchscreen.orLeaveBlank' /></c:set>
-        <touchscreen:numberInput required="false" field_name="birthdateDayCreate" value="${param.birthdateDay}" label="${bDay} (${orLeaveBlank} ${param.age})" min="1" max="31"/>
-        <touchscreen:numberInput required="false" field_name="birthdateMonthCreate" value="${param.birthdateMonth}" label="${bMonth} (${orLeaveBlank} ${param.age})" min="1" max="12"/>
-        <touchscreen:numberInput required="false" field_name="birthdateYearCreate" value="${param.birthdateYear}" label="${bYear} (${orLeaveBlank} ${param.age})" min="1910" max="2020"/>
-    </Td>
-</tr>-->
 
-        <c:if test="${param.fromnida != null}">
-            <tr>
-
-                <td>Age</td>
-                <c:set var="age"><spring:message code='rwandaprimarycare.touchscreen.age' /></c:set>
-                <td><touchscreen:numberInput required="true" label="${age}" field_name="age" value="" min="0" max="150"/></td>
-
-
-            </tr>
-        </c:if>
+        <tr>
+            <td><spring:message code='rwandaprimarycare.touchscreen.birthdate' /></td>
+            <Td>
+                <c:set var="bDay"><spring:message code='rwandaprimarycare.touchscreen.birthdateDay' /></c:set>
+                <c:set var="bMonth"><spring:message code='rwandaprimarycare.touchscreen.birthdateMonth' /></c:set>
+                <c:set var="bYear"><spring:message code='rwandaprimarycare.touchscreen.birthdateYear' /></c:set>
+                <c:set var="orLeaveBlank"><spring:message code='rwandaprimarycare.touchscreen.orLeaveBlank' /></c:set>
+                <touchscreen:numberInput required="false" field_name="birthdateDayCreate" value="${param.birthdateDay}" label="${bDay} (${orLeaveBlank} ${param.age})" min="1" max="31"/>
+                <touchscreen:numberInput required="false" field_name="birthdateMonthCreate" value="${param.birthdateMonth}" label="${bMonth} (${orLeaveBlank} ${param.age})" min="1" max="12"/>
+                <touchscreen:numberInput required="false" field_name="birthdateYearCreate" value="${param.birthdateYear}" label="${bYear} (${orLeaveBlank} ${param.age})" min="1910" max="2020"/>
+            </Td>
+        </tr>
 
         <c:set var="CountryStr"><spring:message code='rwandaprimarycare.touchscreen.country' /></c:set>
         <c:set var="ProvinceStr"><spring:message code='rwandaprimarycare.touchscreen.province' /></c:set>

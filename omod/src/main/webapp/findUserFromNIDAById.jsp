@@ -5,6 +5,10 @@
     <form method="get">
         <c:set var="enterId"><spring:message code="rwandaprimarycare.touchscreen.enterNIDANumber"/></c:set>
         <c:set var="searchStr"><spring:message code="rwandaprimarycare.touchscreen.search"/></c:set>
+        <input type="hidden" name="givenName" value="${param.givenName}" />
+        <input type="hidden" name="familyName" value="${param.familyName}" />
+        <input type="hidden" name="gender"  value="${param.gender}" />
+        <input type="hidden" name="age"  value="${param.age}" />
         <touchscreen:textInput label="${enterId}" field_name="search" required="true" value="" fieldType="id"/>
         <input type="submit" value="${searchStr} }"/>
     </form>
@@ -13,13 +17,13 @@
 <!--//Now create user manually-->
 <c:url var="createHref" value="createNewPatient.form">
     <c:param name="addIdentifier" value="${addIdentifier}"/>
-    <c:param name="givenName" value="${param.FANAME}"/>
-    <c:param name="familyName" value="${param.RWNAME}"/>
-    <c:param name="gender" value="${param.GENDER}"/>
+    <c:param name="givenName" value="${param.givenName}"/>
+    <c:param name="familyName" value="${param.familyName}"/>
+    <c:param name="gender" value="${param.gender}"/>
     <c:param name="birthdate_day" value="${param.BIRTHDATE_DAY}"/>
     <c:param name="birthdate_month" value="${param.BIRTHDATE_MONTH}"/>
     <c:param name="birthdate_year" value="${param.BIRTHDATE_YEAR}"/>
-    <c:param name="age" value="${param.AGE}"/>
+    <c:param name="age" value="${param.age}"/>
     <c:param name="mothersName" value="${param.MRWNAME}"/>
     <c:param name="fathersName" value="${param.FATHERSRWNAME}"/>
     <c:param name="country" value="${param.COUNTRY}"/>
@@ -42,6 +46,10 @@
                     <!--//Now create user manually-->
                     <c:url var="createNIDAHref" value="findUserFromNIDAById.form" >
                         <c:param name="nidaValidatedData" value="${nidaDataString}"/>
+                        <c:param name="givenName" value="${param.givenName}"/>
+                        <c:param name="familyName" value="${param.familyName}"/>
+                        <c:param name="gender" value="${param.gender}"/>
+                        <c:param name="age" value="${param.age}"/>
                     </c:url>
                     <br/>
                     <h1><spring:message code="rwandaprimarycare.touchscreen.nidaSearchResult"/></h1>
@@ -80,6 +88,11 @@
 
                     <c:url var="findInNIDAHref" value="findUserFromNIDAById.form">
                         <c:param name="addIdentifier" value="${addIdentifier}"/>
+                        <c:param name="givenName" value="${param.givenName}"/>
+                        <c:param name="familyName" value="${param.familyName}"/>
+                        <c:param name="gender" value="${param.gender}"/>
+                        <c:param name="age" value="${param.age}"/>
+                        <c:param name="fromnida" value="no"/>
                     </c:url>
 
                     <c:if test="${nidaResult != 'NIDAVALIDATION'}">
