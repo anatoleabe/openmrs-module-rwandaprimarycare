@@ -21,4 +21,4 @@ Mozilla Public License 2.0
 ## Libraries We Use
 The following sets forth attribution notices for third party software that may be contained in portions of this repository. We thank the open source community for all of their contributions.
 
-* OpenMRS - OpenMRS Public License 1.0
+* OpenMRS openmrs-module-rwandaprimarycare (License: OpenMRS Public License 1.0)
